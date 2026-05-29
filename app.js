@@ -79,6 +79,11 @@ function renderLineup() {
       ${a.headliner ? '<div class="lineup__card-hl">Headliner</div>' : ""}
     </div>
   `).join("");
+
+  grid.querySelectorAll(".lineup__card").forEach(card => {
+  card.classList.add("visible");
+});
+  
 }
 
 // Day tabs
