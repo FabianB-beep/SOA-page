@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NEXUS Festival 2026</title>
+  <title>S:O:A 2026</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,7 +13,7 @@
 
   <!-- NAV -->
   <nav class="nav" id="nav">
-    <div class="nav__logo">NEXUS<span>26</span></div>
+    <div class="nav__logo">S:O:A<span>26</span></div>
     <button class="nav__burger" id="burger" aria-label="Menü öffnen">
       <span></span><span></span><span></span>
     </button>
@@ -22,7 +22,7 @@
       <li><a href="#about" class="nav__link" data-section="about">Über uns</a></li>
       <li><a href="#lineup" class="nav__link" data-section="lineup">Line-Up</a></li>
       <li><a href="#schedule" class="nav__link" data-section="schedule">Personal</a></li>
-      <li><a href="#tickets" class="nav__link nav__link--cta">Tickets</a></li>
+      <!-- <li><a href="#tickets" class="nav__link nav__link--cta">Tickets</a></li> -->
     </ul>
   </nav>
 
@@ -34,9 +34,9 @@
       <div class="hero__orb hero__orb--3"></div>
     </div>
     <div class="hero__content">
-      <p class="hero__eyebrow">18. – 20. Juli 2026 · Berlin, Tempelhofer Feld</p>
-      <h1 class="hero__title">NEXUS<br /><span>FESTIVAL</span></h1>
-      <p class="hero__sub">Drei Tage Musik, Kunst & Community</p>
+      <p class="hero__eyebrow">27. Juni 2026 · Windhagen, Pfaffenbachtal</p>
+      <h1 class="hero__title">S:O:A<br /><span>Rock'n'Bach</span></h1>
+      <p class="hero__sub">25 Jahre Stammtisch Windhagen</p>
       <div class="hero__countdown" id="countdown">
         <div class="countdown__block"><span class="countdown__num" id="cd-days">--</span><span class="countdown__label">Tage</span></div>
         <div class="countdown__sep">:</div>
@@ -47,7 +47,7 @@
         <div class="countdown__block"><span class="countdown__num" id="cd-secs">--</span><span class="countdown__label">Sekunden</span></div>
       </div>
       <div class="hero__actions">
-        <a href="#tickets" class="btn btn--primary">Jetzt Tickets sichern</a>
+        <!-- a href="#tickets" class="btn btn--primary">Jetzt Tickets sichern</a> -->
         <a href="#lineup" class="btn btn--ghost">Line-Up entdecken</a>
       </div>
     </div>
@@ -60,41 +60,42 @@
   <section class="about section" id="about">
     <div class="container">
       <div class="section__header">
-        <span class="section__tag">Das Festival</span>
-        <h2 class="section__title">Mehr als ein Konzert</h2>
+        <span class="section__tag">Das S:O:A</span>
+        <h2 class="section__title">Mehr als nur Party</h2>
       </div>
       <div class="about__grid">
         <div class="about__text">
-          <p>NEXUS ist ein dreitägiges Kulturfestival, das Musik, digitale Kunst und kollektives Erleben verbindet. Seit 2019 versammeln wir jährlich über 15.000 Menschen auf dem Tempelhofer Feld in Berlin.</p>
-          <p>Von elektronischen Klängen bis zu Live-Bands, von Installationskunst bis zu Workshops – NEXUS schafft Räume für Begegnungen, die bleiben.</p>
+          <p>Das "S" steht nicht für Schlager </p>
+          <p>In der vierten Auflage des Festivals heißt es diesem '25 Jahre Stammtisch Windhagen' - Eine Jubiläumsparty die verbindet</p>
+          <p>Umsonst und für einen guten Zweck - Wir unterstützen 'Dat Kölsch Hätz'</p>
           <ul class="about__facts">
-            <li><strong>5 Bühnen</strong> mit über 60 Acts</li>
-            <li><strong>3 Tage</strong> voller Programm</li>
-            <li><strong>15.000+</strong> Besucher*innen</li>
-            <li><strong>100% Ökostrom</strong> & nachhaltig</li>
+            <li><strong>1 Bühne</strong> Rock für jeden</li>
+            <li><strong>1 Bunker</strong> Techno bis der Arzt kommt</li>
+            <li><strong>25 Jahre</strong> Stammtisch Windhagen</li>
+            <li><strong>4. Auflage</strong> & immer noch geil!</li>
           </ul>
         </div>
         <div class="about__cards">
           <div class="about__card">
             <div class="about__card-icon">🎵</div>
             <h3>Live Music</h3>
-            <p>Internationale Headliner und lokale Newcomer auf 5 Bühnen</p>
+            <p>Lokale Bands die Spaß an Musik haben und mit euch feiern</p>
           </div>
           <div class="about__card">
-            <div class="about__card-icon">🎨</div>
-            <h3>Kunst & Kultur</h3>
-            <p>Installationen, Performances und interaktive Ausstellungen</p>
+            <div class="about__card-icon">🤝</div>
+            <h3>Cornhole Turnier</h3>
+            <p>Das erste Cornhole Turnier im Paffenbachtal</p>
           </div>
-          <div class="about__card">
+          <!-- div class="about__card">
             <div class="about__card-icon">🌱</div>
             <h3>Nachhaltigkeit</h3>
             <p>Zero-Waste-Konzept, Ökostrom und fairer Handel</p>
           </div>
           <div class="about__card">
-            <div class="about__card-icon">🤝</div>
+            <div class="about__card-icon"></div>
             <h3>Community</h3>
             <p>Workshops, Panels und offene Diskussionsräume</p>
-          </div>
+          </div -->
         </div>
       </div>
     </div>
@@ -110,18 +111,18 @@
 
       <!-- Day Tabs -->
       <div class="tabs" role="tablist" aria-label="Festival-Tage">
-        <button class="tab tab--active" data-day="1" role="tab">Fr, 18. Juli</button>
-        <button class="tab" data-day="2" role="tab">Sa, 19. Juli</button>
-        <button class="tab" data-day="3" role="tab">So, 20. Juli</button>
+        <button class="tab tab--active" data-day="1" role="tab">Fr, 26. Juni</button>
+        <button class="tab" data-day="2" role="tab">Sa, 27. Juni</button>
+        <button class="tab" data-day="3" role="tab">So, 28. Juni</button>
       </div>
 
       <!-- Stage Filter -->
       <div class="stage-filter">
         <button class="stage-btn stage-btn--active" data-stage="all">Alle Bühnen</button>
         <button class="stage-btn" data-stage="main">Main Stage</button>
-        <button class="stage-btn" data-stage="nexus">Nexus Stage</button>
-        <button class="stage-btn" data-stage="forest">Forest Stage</button>
-        <button class="stage-btn" data-stage="club">Club Stage</button>
+        <button class="stage-btn" data-stage="tekkno">Techno Bunker</button>
+        <!-- button class="stage-btn" data-stage="forest">Forest Stage</button>
+        <button class="stage-btn" data-stage="club">Club Stage</button -->
       </div>
 
       <!-- Lineup Grid -->
@@ -208,12 +209,12 @@
   <section class="tickets section" id="tickets">
     <div class="container">
       <div class="section__header">
-        <span class="section__tag">Jetzt sichern</span>
-        <h2 class="section__title">Tickets</h2>
+        <span class="section__tag">Jetzt anmelden</span>
+        <h2 class="section__title">Cornholeturnier</h2>
       </div>
       <div class="tickets__grid">
         <div class="ticket-card">
-          <div class="ticket-card__badge">Tagesticket</div>
+          <!-- div class="ticket-card__badge">Tagesticket</div>
           <div class="ticket-card__price">49 <span>€</span></div>
           <ul class="ticket-card__features">
             <li>1 Tag nach Wahl</li>
@@ -221,12 +222,12 @@
             <li>Kunstinstallationen inklusive</li>
           </ul>
           <a href="#" class="btn btn--outline">Kaufen</a>
-        </div>
+        </div -->
         <div class="ticket-card ticket-card--featured">
-          <div class="ticket-card__badge">Weekend Pass</div>
-          <div class="ticket-card__popular">Beliebteste Wahl</div>
-          <div class="ticket-card__price">109 <span>€</span></div>
-          <ul class="ticket-card__features">
+          <!-- div class="ticket-card__badge">Weekend Pass</div>
+          <div class="ticket-card__popular">Beliebteste Wahl</div -->
+          <div class="ticket-card__price">LINK</div>
+          <!-- ul class="ticket-card__features">
             <li>Alle 3 Tage</li>
             <li>Zugang zu allen Bühnen</li>
             <li>Kunstinstallationen inklusive</li>
@@ -245,7 +246,7 @@
             <li>Exklusives Merchandise</li>
           </ul>
           <a href="#" class="btn btn--outline">Kaufen</a>
-        </div>
+        </div -->
       </div>
     </div>
   </section>
