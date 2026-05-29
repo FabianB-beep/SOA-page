@@ -2,15 +2,16 @@
 
 const LINEUP = [
 // --- Day 1 (Freitag) ---
-  { day: 1, stage: "tekkno",   time: "22:00", artist: "Spotify Techno",      genre: "Techno",      headliner: false },
+  // { day: 1, stage: "tekkno",   time: "22:00", artist: "Spotify Techno",      genre: "Techno",      headliner: false },
 
   // --- Day 2 (Samstag) ---
-  { day: 2, stage: "main",   time: "19:00", artist: "Bitch on the run",      genre: "Blues Cover",      headliner: false },
-  { day: 2, stage: "main",   time: "20:15", artist: "eXemple",               genre: "Electronic",      headliner: false },
-  { day: 2, stage: "main",   time: "21:45", artist: "MIXED PICKLES",         genre: "Art Pop",         headliner: false  },
-  { day: 2, stage: "main",   time: "23:15", artist: "ALLES AUF ZUCKER",      genre: "Hard Rock",       headliner: true },
+  { day: 1, stage: "main",   time: "19:00", artist: "Bitch on the run",      genre: "Blues Cover",      headliner: false },
+  { day: 1, stage: "main",   time: "20:15", artist: "eXemple",               genre: "Electronic",      headliner: false },
+  { day: 1, stage: "main",   time: "21:45", artist: "MIXED PICKLES",         genre: "Art Pop",         headliner: false  },
+  { day: 1, stage: "main",   time: "23:15", artist: "ALLES AUF ZUCKER",      genre: "Hard Rock",       headliner: true },
+  { day: 3, stage: "tekkno", time: "After Show", artist: "Spotify Techno",      genre: "Techno",      headliner: false },
 
-  { day: 3, stage: "tekkno",   time: "01:00", artist: "Spotify Techno",      genre: "Techno",      headliner: false },
+  // { day: 3, stage: "tekkno",   time: "01:00", artist: "Spotify Techno",      genre: "Techno",      headliner: false },
 
 
   
@@ -44,9 +45,9 @@ const SHIFTS = [
 ];
 
 const DAY_LABELS = {
-  1: "Fr, 26. Juni",
-  2: "Sa, 27. Juni",
-  3: "So, 28. Juni",
+  // 1: "Fr, 26. Juni",
+  1: "Sa, 27. Juni",
+  // 3: "So, 28. Juni",
 };
 
 const SHIFT_LABELS = {

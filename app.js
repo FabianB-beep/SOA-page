@@ -55,7 +55,7 @@ setInterval(updateCountdown, 1000);
 
 // ── LINEUP ───────────────────────────────────────────────────────────────────
 
-let activeDay   = 2;
+let activeDay   = 1;
 let activeStage = "all";
 
 function renderLineup() {
