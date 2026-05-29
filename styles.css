@@ -8,8 +8,8 @@
   --border:      rgba(255,255,255,0.08);
   --text:        #e8e8f0;
   --text-muted:  #7878a0;
-  --accent:      #7c3aed;
-  --accent-2:    #a855f7;
+  --accent:      #faa200;
+  --accent-2:    #ff9c1b;
   --accent-hot:  #f59e0b;
   --accent-teal: #06b6d4;
   --gradient:    linear-gradient(135deg, var(--accent), var(--accent-2));
@@ -105,7 +105,7 @@ input, select { font: inherit; color: inherit; }
 .btn--primary {
   background: var(--gradient);
   color: #fff;
-  box-shadow: 0 0 24px rgba(124,58,237,0.4);
+  box-shadow: 0 0 24px rgba(252, 148, 13, 0.4);
 }
 .btn--primary:hover { opacity: 0.9; box-shadow: 0 0 36px rgba(124,58,237,0.6); transform: translateY(-2px); }
 
@@ -118,7 +118,7 @@ input, select { font: inherit; color: inherit; }
 
 .btn--outline {
   background: transparent;
-  border: 1px solid rgba(124,58,237,0.5);
+  border: 1px solid rgba(241, 144, 16, 0.5);
   color: var(--accent-2);
 }
 .btn--outline:hover { background: rgba(124,58,237,0.1); transform: translateY(-2px); }
