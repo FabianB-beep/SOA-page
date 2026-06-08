@@ -264,6 +264,24 @@
     </div>
   </footer>
 
+  <!-- LINEUP MODAL -->
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalArtist" hidden>
+    <div class="modal" id="modal">
+      <button class="modal__close" id="modalClose" aria-label="Schließen">&times;</button>
+      <div class="modal__stage" id="modalStage"></div>
+      <div class="modal__meta">
+        <span class="modal__time" id="modalTime"></span>
+        <span class="modal__sep">·</span>
+        <span class="modal__genre" id="modalGenre"></span>
+        <span class="modal__sep" id="modalOriginSep">·</span>
+        <span class="modal__origin" id="modalOrigin"></span>
+      </div>
+      <h2 class="modal__artist" id="modalArtist"></h2>
+      <p class="modal__desc" id="modalDesc"></p>
+      <div class="modal__footer" id="modalFooter"></div>
+    </div>
+  </div>
+
   <script src="data.js"></script>
   <script src="app.js"></script>
 </body>

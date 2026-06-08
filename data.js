@@ -1,20 +1,46 @@
 // ── LINEUP DATA ──────────────────────────────────────────────────────────────
 
 const LINEUP = [
-// --- Day 1 (Freitag) ---
-  // { day: 1, stage: "tekkno",   time: "22:00", artist: "Spotify Techno",      genre: "Techno",      headliner: false },
-
-  // --- Day 2 (Samstag) ---
-  { day: 1, stage: "main",   time: "19:00", artist: "Bitch on the run",      genre: "Blues Cover",      headliner: false },
-  { day: 1, stage: "main",   time: "20:15", artist: "eXemple",               genre: "Electronic",      headliner: false },
-  { day: 1, stage: "main",   time: "21:45", artist: "MIXED PICKLES",         genre: "Art Pop",         headliner: false  },
-  { day: 1, stage: "main",   time: "23:15", artist: "ALLES AUF ZUCKER",      genre: "Hard Rock",       headliner: true },
-  { day: 1, stage: "tekkno", time: "23:59", artist: "Spotify Techno",   genre: "Techno",      headliner: false },
-
-  // { day: 3, stage: "tekkno",   time: "01:00", artist: "Spotify Techno",      genre: "Techno",      headliner: false },
-
-
-  
+  {
+    day: 1, stage: "main", time: "19:00", headliner: false,
+    artist: "Bitch on the run",
+    genre:  "Blues Cover",
+    origin: "Köln",
+    desc:   "Bitch on the run bringen dreckigen, rohen Blues auf die Bühne – roh, laut und unverfälscht. Coversongs von Klassikern bis zu modernen Blues-Hits.",
+    url:    "",
+  },
+  {
+    day: 1, stage: "main", time: "20:15", headliner: false,
+    artist: "eXemple",
+    genre:  "Electronic",
+    origin: "Bonn",
+    desc:   "eXemple verbindet elektronische Beats mit Live-Instrumenten zu einem einzigartigen Sound zwischen Club und Konzert.",
+    url:    "",
+  },
+  {
+    day: 1, stage: "main", time: "21:45", headliner: false,
+    artist: "MIXED PICKLES",
+    genre:  "Art Pop",
+    origin: "Windhagen",
+    desc:   "MIXED PICKLES – bunt, laut und ungekämmt. Die Band aus Windhagen mischt Pop, Rock und Punk zu einer unwiderstehlichen Portion Chaos.",
+    url:    "",
+  },
+  {
+    day: 1, stage: "main", time: "23:15", headliner: true,
+    artist: "ALLES AUF ZUCKER",
+    genre:  "Hard Rock",
+    origin: "Koblenz",
+    desc:   "Der Headliner des Abends. ALLES AUF ZUCKER liefern harten Rock mit Ansage – fette Gitarren, treibende Rhythmen und eine Show, die niemanden kalt lässt.",
+    url:    "",
+  },
+  {
+    day: 1, stage: "tekkno", time: "23:59", headliner: false,
+    artist: "Spotify Techno",
+    genre:  "Techno",
+    origin: "Pfaffenbachtal",
+    desc:   "Der Tekkno Bunker öffnet seine Tore. Ab Mitternacht gibt es elektronische Beats bis zum Morgengrauen.",
+    url:    "",
+  },
 ];
 
 const STAGE_LABELS = {

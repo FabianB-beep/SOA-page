@@ -80,9 +80,10 @@ function renderLineup() {
     </div>
   `).join("");
 
-  grid.querySelectorAll(".lineup__card").forEach(card => {
-  card.classList.add("visible");
-});
+  grid.querySelectorAll(".lineup__card").forEach((card, i) => {
+    card.classList.add("visible");
+    card.addEventListener("click", () => openModal(filtered[i]));
+  });
   
 }
 
@@ -176,6 +177,63 @@ if (filterDay && filterArea && filterRole && searchPerson) {
 
   renderSchedule();
 }
+
+// ── LINEUP MODAL ─────────────────────────────────────────────────────────────
+
+const backdrop   = document.getElementById("modalBackdrop");
+const modalClose = document.getElementById("modalClose");
+
+function openModal(act) {
+  document.getElementById("modalStage").textContent  = STAGE_LABELS[act.stage] || act.stage;
+  document.getElementById("modalTime").textContent   = act.time;
+  document.getElementById("modalGenre").textContent  = act.genre;
+
+  const originEl  = document.getElementById("modalOrigin");
+  const originSep = document.getElementById("modalOriginSep");
+  if (act.origin) {
+    originEl.textContent  = act.origin;
+    originSep.hidden = originEl.hidden = false;
+  } else {
+    originSep.hidden = originEl.hidden = true;
+  }
+
+  document.getElementById("modalArtist").textContent = act.artist;
+  document.getElementById("modalDesc").textContent   = act.desc || "";
+
+  const footer = document.getElementById("modalFooter");
+  footer.innerHTML = "";
+  if (act.headliner) {
+    const hl = document.createElement("span");
+    hl.className = "modal__badge modal__badge--hl";
+    hl.textContent = "⭐ Headliner";
+    footer.appendChild(hl);
+  }
+  if (act.url) {
+    const link = document.createElement("a");
+    link.className = "modal__badge";
+    link.href = act.url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "↗ Mehr erfahren";
+    footer.appendChild(link);
+  }
+
+  backdrop.hidden = false;
+  requestAnimationFrame(() => backdrop.classList.add("modal--visible"));
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal() {
+  backdrop.classList.remove("modal--visible");
+  backdrop.addEventListener("transitionend", () => {
+    backdrop.hidden = true;
+    document.body.style.overflow = "";
+  }, { once: true });
+}
+
+modalClose.addEventListener("click", closeModal);
+backdrop.addEventListener("click", e => { if (e.target === backdrop) closeModal(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !backdrop.hidden) closeModal(); });
 
 // ── INTERSECTION OBSERVER (fade-in) ──────────────────────────────────────────
 
