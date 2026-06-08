@@ -350,6 +350,7 @@ input, select { font: inherit; color: inherit; }
 }
 
 .about__card {
+  display: block;
   background: var(--bg-3);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
@@ -357,9 +358,21 @@ input, select { font: inherit; color: inherit; }
   transition: transform var(--transition), border-color var(--transition);
   opacity: 0;
   transform: translateY(20px);
+  cursor: pointer;
 }
-.about__card.visible { opacity: 1; transform: none; transition: opacity 0.5s ease, transform 0.5s ease; }
+.about__card.visible { opacity: 1; transform: none; transition: opacity 0.5s ease, transform 0.5s ease, transform 0.25s ease, border-color 0.25s ease; }
 .about__card:hover { transform: translateY(-4px); border-color: rgba(124,58,237,0.3); }
+.about__card:hover .about__card-arrow { opacity: 1; transform: translateX(0); }
+
+.about__card-arrow {
+  display: inline-block;
+  margin-top: 12px;
+  color: var(--accent-2);
+  font-size: 1rem;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity var(--transition), transform var(--transition);
+}
 
 .about__card-icon { font-size: 2rem; margin-bottom: 12px; }
 .about__card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; }
@@ -659,6 +672,42 @@ input, select { font: inherit; color: inherit; }
   padding: 60px 0;
   font-size: 1rem;
 }
+
+/* ── CORNHOLE ─────────────────────────────────────────────────────────────── */
+.cornhole { background: var(--bg-2); }
+
+.cornhole__image {
+  position: relative;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  aspect-ratio: 16 / 9;
+  background: var(--bg-3);
+}
+
+.cornhole__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cornhole__placeholder-text {
+  display: none;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 24px;
+}
+
+.cornhole__image--missing img { display: none; }
+.cornhole__image--missing .cornhole__placeholder-text { display: flex; }
 
 /* ── TICKETS ──────────────────────────────────────────────────────────────── */
 .tickets { background: var(--bg); }

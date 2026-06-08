@@ -78,16 +78,18 @@
           </ul>
         </div>
         <div class="about__cards">
-          <div class="about__card">
+          <a class="about__card" href="#lineup">
             <div class="about__card-icon">🎵</div>
             <h3>Live Music</h3>
             <p>Lokale Bands die Spaß an Musik haben und mit euch feiern</p>
-          </div>
-          <div class="about__card">
+            <span class="about__card-arrow">→</span>
+          </a>
+          <a class="about__card" href="#cornhole">
             <div class="about__card-icon">🤝</div>
             <h3>Cornhole Turnier</h3>
             <p>Das erste Cornhole Turnier im Paffenbachtal</p>
-          </div>
+            <span class="about__card-arrow">→</span>
+          </a>
           <!-- div class="about__card">
             <div class="about__card-icon">🌱</div>
             <h3>Nachhaltigkeit</h3>
@@ -207,16 +209,18 @@
     </div>
   </section -->
 
-  <!-- TICKETS -->
-  <section class="tickets section" id="cornhole">
+  <!-- CORNHOLE -->
+  <section class="cornhole section" id="cornhole">
     <div class="container">
       <div class="section__header">
+        <span class="section__tag">Turnier</span>
         <h2 class="section__title">Cornholeturnier</h2>
       </div>
-      <div class="tickets__grid">
-        <div class="ticket-card">
-        <div class="ticket-card ticket-card--featured">
-      </div>
+      <figure class="cornhole__image">
+        <img src="assets/img/cornhole.jpg" alt="Cornhole Turnier im Pfaffenbachtal"
+             onerror="this.parentElement.classList.add('cornhole__image--missing')" />
+        <figcaption class="cornhole__placeholder-text">📸 Bild folgt – ersetze <code>assets/img/cornhole.jpg</code></figcaption>
+      </figure>
     </div>
   </section>
 
