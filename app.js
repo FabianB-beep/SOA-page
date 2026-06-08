@@ -115,67 +115,67 @@ const filterArea   = document.getElementById("filterArea");
 const filterRole   = document.getElementById("filterRole");
 const searchPerson = document.getElementById("searchPerson");
 
-function shiftBadge(shift) {
-  return `<span class="badge badge--${shift}">${SHIFT_LABELS[shift]}</span>`;
-}
+if (filterDay && filterArea && filterRole && searchPerson) {
+  function shiftBadge(shift) {
+    return `<span class="badge badge--${shift}">${SHIFT_LABELS[shift]}</span>`;
+  }
 
-function renderSchedule() {
-  const day    = filterDay.value;
-  const area   = filterArea.value;
-  const role   = filterRole.value;
-  const search = searchPerson.value.trim().toLowerCase();
+  function renderSchedule() {
+    const day    = filterDay.value;
+    const area   = filterArea.value;
+    const role   = filterRole.value;
+    const search = searchPerson.value.trim().toLowerCase();
 
-  const filtered = SHIFTS.filter(s =>
-    (day  === "all" || String(s.day)  === day) &&
-    (area === "all" || s.area  === area) &&
-    (role === "all" || s.role  === role) &&
-    (search === ""  || s.name.toLowerCase().includes(search))
-  ).sort((a, b) => a.day - b.day || a.name.localeCompare(b.name));
+    const filtered = SHIFTS.filter(s =>
+      (day  === "all" || String(s.day)  === day) &&
+      (area === "all" || s.area  === area) &&
+      (role === "all" || s.role  === role) &&
+      (search === ""  || s.name.toLowerCase().includes(search))
+    ).sort((a, b) => a.day - b.day || a.name.localeCompare(b.name));
 
-  const empty = document.getElementById("scheduleEmpty");
-  empty.classList.toggle("hidden", filtered.length > 0);
+    const empty = document.getElementById("scheduleEmpty");
+    empty.classList.toggle("hidden", filtered.length > 0);
 
-  // Table rows
-  const tbody = document.getElementById("scheduleBody");
-  tbody.innerHTML = filtered.map(s => `
-    <tr>
-      <td class="schedule__name">${s.name}</td>
-      <td><span class="role-badge">${s.role}</span></td>
-      <td>${DAY_LABELS[s.day]}</td>
-      <td>${shiftBadge(s.shift)}</td>
-      <td class="schedule__time">${s.time}</td>
-      <td><span class="area-badge">${s.area}</span></td>
-      <td class="schedule__note">${s.note || "–"}</td>
-    </tr>
-  `).join("");
+    const tbody = document.getElementById("scheduleBody");
+    tbody.innerHTML = filtered.map(s => `
+      <tr>
+        <td class="schedule__name">${s.name}</td>
+        <td><span class="role-badge">${s.role}</span></td>
+        <td>${DAY_LABELS[s.day]}</td>
+        <td>${shiftBadge(s.shift)}</td>
+        <td class="schedule__time">${s.time}</td>
+        <td><span class="area-badge">${s.area}</span></td>
+        <td class="schedule__note">${s.note || "–"}</td>
+      </tr>
+    `).join("");
 
-  // Mobile cards
-  const cards = document.getElementById("scheduleCards");
-  cards.innerHTML = filtered.map(s => `
-    <div class="scard">
-      <div class="scard__header">
-        <div>
-          <div class="scard__name">${s.name}</div>
-          <div class="scard__meta"><span class="role-badge">${s.role}</span></div>
+    const cards = document.getElementById("scheduleCards");
+    cards.innerHTML = filtered.map(s => `
+      <div class="scard">
+        <div class="scard__header">
+          <div>
+            <div class="scard__name">${s.name}</div>
+            <div class="scard__meta"><span class="role-badge">${s.role}</span></div>
+          </div>
+          ${shiftBadge(s.shift)}
         </div>
-        ${shiftBadge(s.shift)}
+        <div class="scard__body">
+          <div class="scard__row"><span>Tag</span><span>${DAY_LABELS[s.day]}</span></div>
+          <div class="scard__row"><span>Uhrzeit</span><span>${s.time}</span></div>
+          <div class="scard__row"><span>Bereich</span><span><span class="area-badge">${s.area}</span></span></div>
+          ${s.note ? `<div class="scard__row"><span>Notiz</span><span>${s.note}</span></div>` : ""}
+        </div>
       </div>
-      <div class="scard__body">
-        <div class="scard__row"><span>Tag</span><span>${DAY_LABELS[s.day]}</span></div>
-        <div class="scard__row"><span>Uhrzeit</span><span>${s.time}</span></div>
-        <div class="scard__row"><span>Bereich</span><span><span class="area-badge">${s.area}</span></span></div>
-        ${s.note ? `<div class="scard__row"><span>Notiz</span><span>${s.note}</span></div>` : ""}
-      </div>
-    </div>
-  `).join("");
+    `).join("");
+  }
+
+  filterDay.addEventListener("change", renderSchedule);
+  filterArea.addEventListener("change", renderSchedule);
+  filterRole.addEventListener("change", renderSchedule);
+  searchPerson.addEventListener("input", renderSchedule);
+
+  renderSchedule();
 }
-
-filterDay.addEventListener("change", renderSchedule);
-filterArea.addEventListener("change", renderSchedule);
-filterRole.addEventListener("change", renderSchedule);
-searchPerson.addEventListener("input", renderSchedule);
-
-renderSchedule();
 
 // ── INTERSECTION OBSERVER (fade-in) ──────────────────────────────────────────
 
