@@ -908,14 +908,22 @@ input, select { font: inherit; color: inherit; }
   .ch-groups { grid-template-columns: 1fr; }
 
   .ch-match {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    gap: 8px;
+    grid-template-columns: 44px 1fr auto 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "time t1 vs t2"
+      ".    score score field";
+    gap: 4px 8px;
+    padding: 8px 10px;
   }
-  .ch-match__time   { font-size: 0.8rem; }
-  .ch-match__team--right { text-align: left; }
-  .ch-match__vs     { text-align: left; }
-  .ch-match__field  { text-align: left; }
+  .ch-match__time  { grid-area: time;  font-size: 0.75rem; align-self: center; }
+  .ch-match__team:not(.ch-match__team--right) { grid-area: t1; align-self: center; }
+  .ch-match__vs    { grid-area: vs;    align-self: center; }
+  .ch-match__team--right { grid-area: t2; text-align: left; align-self: center; }
+  .ch-match__score { grid-area: score; text-align: left; font-size: 0.8rem; color: var(--text-muted); }
+  .ch-match__field { grid-area: field; text-align: right; font-size: 9px; align-self: center; }
+
+  .ch-match__team  { font-size: 0.82rem; }
 }
 
 /* ── TICKETS ──────────────────────────────────────────────────────────────── */
