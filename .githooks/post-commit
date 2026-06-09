@@ -1,0 +1,9 @@
+#!/bin/sh
+# Aktualisiert den Cache-Busting-Hash in index.html nach jedem Commit
+
+HASH=$(git rev-parse --short HEAD)
+sed -i "s/?v=[a-f0-9]*\"/?v=$HASH\"/g" index.html
+
+# Änderung direkt in den letzten Commit aufnehmen (kein neuer Commit)
+git add index.html
+git commit --amend --no-edit --no-verify
