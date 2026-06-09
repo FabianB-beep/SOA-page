@@ -2,6 +2,14 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 button, a { -webkit-tap-highlight-color: transparent; }
 
+@font-face {
+  font-family: "Radioactive Granny";
+  src: url("assets/fonts/RadioactiveGranny.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --bg:          #0a0003;
   --bg-2:        #0f0005;
@@ -20,7 +28,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   --shadow:      0 4px 24px rgba(0,0,0,0.6);
   --transition:  0.25s ease;
   --font:        "Inter", system-ui, sans-serif;
-  --font-display:"Space Grotesk", system-ui, sans-serif;
+  --font-display:"Radioactive Granny", "Space Grotesk", system-ui, sans-serif;
 }
 
 html { scroll-behavior: smooth; }
