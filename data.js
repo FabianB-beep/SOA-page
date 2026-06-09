@@ -72,38 +72,68 @@ const SHIFTS = [
 ];
 
 // ── CORNHOLE DATA ────────────────────────────────────────────────────────────
+// 14 Teams · 3 Gruppen · 3 Felder parallel · Start 16:00
+// Gruppe A (5 Teams) → Feld 1 · Gruppe B (5 Teams) → Feld 2 · Gruppe C (4 Teams) → Feld 3
+// Gruppenphase endet ~19:20 (A/B) bzw. ~17:40 (C) · Halbfinale 19:30 · Finale 20:00
 
 const CORNHOLE_TEAMS = [
-  { id: 1, name: "Bachtal Bomber",     group: "A", players: ["Jonas W.", "Markus R."] },
-  { id: 2, name: "Die Holzwerfer",     group: "A", players: ["Stefan K.", "Tobias H."] },
-  { id: 3, name: "Säcke & Söhne",      group: "A", players: ["Axel B.", "Patrick N."] },
-  { id: 4, name: "Wurfmaschinen",      group: "A", players: ["Fabian L.", "Nico S."] },
-  { id: 5, name: "Loch & Weg",         group: "B", players: ["Heiko M.", "Andreas P."] },
-  { id: 6, name: "Team Kaffeesack",    group: "B", players: ["Florian D.", "Julian F."] },
-  { id: 7, name: "Windhagener Adler",  group: "B", players: ["Christian T.", "Simon G."] },
-  { id: 8, name: "Two Bags One Hole",  group: "B", players: ["Lars E.", "Benjamin C."] },
+  // Gruppe A – Feld 1
+  { id:  1, name: "Bachtal Bomber",     group: "A", players: ["Jonas W.",     "Markus R."]    },
+  { id:  2, name: "Die Holzwerfer",     group: "A", players: ["Stefan K.",    "Tobias H."]    },
+  { id:  3, name: "Säcke & Söhne",      group: "A", players: ["Axel B.",      "Patrick N."]   },
+  { id:  4, name: "Wurfmaschinen",      group: "A", players: ["Fabian L.",    "Nico S."]      },
+  { id:  5, name: "Loch & Weg",         group: "A", players: ["Heiko M.",     "Andreas P."]   },
+  // Gruppe B – Feld 2
+  { id:  6, name: "Team Kaffeesack",    group: "B", players: ["Florian D.",   "Julian F."]    },
+  { id:  7, name: "Windhagener Adler",  group: "B", players: ["Christian T.", "Simon G."]     },
+  { id:  8, name: "Two Bags One Hole",  group: "B", players: ["Lars E.",      "Benjamin C."]  },
+  { id:  9, name: "Sackgesichter",      group: "B", players: ["Michael B.",   "Rene K."]      },
+  { id: 10, name: "Zielwasser e.V.",    group: "B", players: ["Dirk H.",      "Thorsten M."]  },
+  // Gruppe C – Feld 3
+  { id: 11, name: "Vollpfosten FC",     group: "C", players: ["Oliver S.",    "Marco W."]     },
+  { id: 12, name: "Brettl & Sack",      group: "C", players: ["Kevin J.",     "Dennis P."]    },
+  { id: 13, name: "Die Ungeworfenen",   group: "C", players: ["Timo R.",      "Philipp N."]   },
+  { id: 14, name: "Airball United",     group: "C", players: ["Sebastian L.", "Alexander F."] },
 ];
 
 const CORNHOLE_MATCHES = [
-  // ── Gruppenphase ──────────────────────────────────────────────────────────
-  { id: 1,  round: "Gruppenphase", group: "A", field: 1, time: "12:00", team1: 1, team2: 2, score1: null, score2: null },
-  { id: 2,  round: "Gruppenphase", group: "B", field: 2, time: "12:00", team1: 5, team2: 6, score1: null, score2: null },
-  { id: 3,  round: "Gruppenphase", group: "A", field: 1, time: "12:20", team1: 3, team2: 4, score1: null, score2: null },
-  { id: 4,  round: "Gruppenphase", group: "B", field: 2, time: "12:20", team1: 7, team2: 8, score1: null, score2: null },
-  { id: 5,  round: "Gruppenphase", group: "A", field: 1, time: "12:40", team1: 1, team2: 3, score1: null, score2: null },
-  { id: 6,  round: "Gruppenphase", group: "B", field: 2, time: "12:40", team1: 5, team2: 7, score1: null, score2: null },
-  { id: 7,  round: "Gruppenphase", group: "A", field: 1, time: "13:00", team1: 2, team2: 4, score1: null, score2: null },
-  { id: 8,  round: "Gruppenphase", group: "B", field: 2, time: "13:00", team1: 6, team2: 8, score1: null, score2: null },
-  { id: 9,  round: "Gruppenphase", group: "A", field: 1, time: "13:20", team1: 1, team2: 4, score1: null, score2: null },
-  { id: 10, round: "Gruppenphase", group: "B", field: 2, time: "13:20", team1: 5, team2: 8, score1: null, score2: null },
-  { id: 11, round: "Gruppenphase", group: "A", field: 1, time: "13:40", team1: 2, team2: 3, score1: null, score2: null },
-  { id: 12, round: "Gruppenphase", group: "B", field: 2, time: "13:40", team1: 6, team2: 7, score1: null, score2: null },
-  // ── Halbfinale ───────────────────────────────────────────────────────────
-  { id: 13, round: "Halbfinale", group: null, field: 1, time: "14:10", team1: null, team2: null, score1: null, score2: null, label1: "1. Gruppe A", label2: "2. Gruppe B" },
-  { id: 14, round: "Halbfinale", group: null, field: 2, time: "14:10", team1: null, team2: null, score1: null, score2: null, label1: "1. Gruppe B", label2: "2. Gruppe A" },
-  // ── Spiel um Platz 3 & Finale ────────────────────────────────────────────
-  { id: 15, round: "Platz 3",  group: null, field: 1, time: "14:40", team1: null, team2: null, score1: null, score2: null, label1: "Verlierer HF 1", label2: "Verlierer HF 2" },
-  { id: 16, round: "Finale",   group: null, field: 2, time: "14:40", team1: null, team2: null, score1: null, score2: null, label1: "Sieger HF 1",   label2: "Sieger HF 2" },
+  // ── Gruppenphase A – Feld 1 (5 Teams · 10 Spiele · 16:00–19:20) ──────────
+  { id:  1, round: "Gruppenphase", group: "A", field: 1, time: "16:00", team1:  1, team2:  2, score1: null, score2: null },
+  { id:  2, round: "Gruppenphase", group: "A", field: 1, time: "16:20", team1:  3, team2:  4, score1: null, score2: null },
+  { id:  3, round: "Gruppenphase", group: "A", field: 1, time: "16:40", team1:  1, team2:  3, score1: null, score2: null },
+  { id:  4, round: "Gruppenphase", group: "A", field: 1, time: "17:00", team1:  2, team2:  5, score1: null, score2: null },
+  { id:  5, round: "Gruppenphase", group: "A", field: 1, time: "17:20", team1:  4, team2:  5, score1: null, score2: null },
+  { id:  6, round: "Gruppenphase", group: "A", field: 1, time: "17:40", team1:  1, team2:  4, score1: null, score2: null },
+  { id:  7, round: "Gruppenphase", group: "A", field: 1, time: "18:00", team1:  2, team2:  3, score1: null, score2: null },
+  { id:  8, round: "Gruppenphase", group: "A", field: 1, time: "18:20", team1:  1, team2:  5, score1: null, score2: null },
+  { id:  9, round: "Gruppenphase", group: "A", field: 1, time: "18:40", team1:  3, team2:  5, score1: null, score2: null },
+  { id: 10, round: "Gruppenphase", group: "A", field: 1, time: "19:00", team1:  2, team2:  4, score1: null, score2: null },
+  // ── Gruppenphase B – Feld 2 (5 Teams · 10 Spiele · 16:00–19:20) ──────────
+  { id: 11, round: "Gruppenphase", group: "B", field: 2, time: "16:00", team1:  6, team2:  7, score1: null, score2: null },
+  { id: 12, round: "Gruppenphase", group: "B", field: 2, time: "16:20", team1:  8, team2:  9, score1: null, score2: null },
+  { id: 13, round: "Gruppenphase", group: "B", field: 2, time: "16:40", team1:  6, team2:  8, score1: null, score2: null },
+  { id: 14, round: "Gruppenphase", group: "B", field: 2, time: "17:00", team1:  7, team2: 10, score1: null, score2: null },
+  { id: 15, round: "Gruppenphase", group: "B", field: 2, time: "17:20", team1:  9, team2: 10, score1: null, score2: null },
+  { id: 16, round: "Gruppenphase", group: "B", field: 2, time: "17:40", team1:  6, team2:  9, score1: null, score2: null },
+  { id: 17, round: "Gruppenphase", group: "B", field: 2, time: "18:00", team1:  7, team2:  8, score1: null, score2: null },
+  { id: 18, round: "Gruppenphase", group: "B", field: 2, time: "18:20", team1:  6, team2: 10, score1: null, score2: null },
+  { id: 19, round: "Gruppenphase", group: "B", field: 2, time: "18:40", team1:  8, team2: 10, score1: null, score2: null },
+  { id: 20, round: "Gruppenphase", group: "B", field: 2, time: "19:00", team1:  7, team2:  9, score1: null, score2: null },
+  // ── Gruppenphase C – Feld 3 (4 Teams · 6 Spiele · 16:00–17:40) ───────────
+  { id: 21, round: "Gruppenphase", group: "C", field: 3, time: "16:00", team1: 11, team2: 12, score1: null, score2: null },
+  { id: 22, round: "Gruppenphase", group: "C", field: 3, time: "16:20", team1: 13, team2: 14, score1: null, score2: null },
+  { id: 23, round: "Gruppenphase", group: "C", field: 3, time: "16:40", team1: 11, team2: 13, score1: null, score2: null },
+  { id: 24, round: "Gruppenphase", group: "C", field: 3, time: "17:00", team1: 12, team2: 14, score1: null, score2: null },
+  { id: 25, round: "Gruppenphase", group: "C", field: 3, time: "17:20", team1: 11, team2: 14, score1: null, score2: null },
+  { id: 26, round: "Gruppenphase", group: "C", field: 3, time: "17:40", team1: 12, team2: 13, score1: null, score2: null },
+  // ── Halbfinale (19:30) ────────────────────────────────────────────────────
+  // Top 1 je Gruppe + bester Gruppenzweiter = 4 Halbfinalisten
+  { id: 27, round: "Halbfinale", group: null, field: 1, time: "19:30", team1: null, team2: null, score1: null, score2: null, label1: "1. Gruppe A", label2: "2. Gruppe B" },
+  { id: 28, round: "Halbfinale", group: null, field: 2, time: "19:30", team1: null, team2: null, score1: null, score2: null, label1: "1. Gruppe B", label2: "Bester 2. Platz" },
+  { id: 29, round: "Halbfinale", group: null, field: 3, time: "19:30", team1: null, team2: null, score1: null, score2: null, label1: "1. Gruppe C", label2: "2. Gruppe A" },
+  // ── Spiel um Platz 3 & Finale (20:00) ────────────────────────────────────
+  { id: 30, round: "Platz 3",  group: null, field: 1, time: "20:00", team1: null, team2: null, score1: null, score2: null, label1: "Verlierer HF 1", label2: "Verlierer HF 2" },
+  { id: 31, round: "Finale",   group: null, field: 2, time: "20:00", team1: null, team2: null, score1: null, score2: null, label1: "Sieger HF 1",   label2: "Sieger HF 2"   },
 ];
 
 const DAY_LABELS = {

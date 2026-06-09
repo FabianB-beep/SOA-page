@@ -238,7 +238,7 @@ document.addEventListener("keydown", e => { if (e.key === "Escape" && !backdrop.
 // ── CORNHOLE ─────────────────────────────────────────────────────────────────
 
 function renderCornholeTeams() {
-  ["A", "B"].forEach(group => {
+  ["A", "B", "C"].forEach(group => {
     const container = document.getElementById(`ch-teams-${group}`);
     if (!container) return;
     const teams = CORNHOLE_TEAMS.filter(t => t.group === group);
@@ -284,6 +284,7 @@ function renderCornholeSchedule() {
                 <div class="ch-match__vs">VS</div>
                 <div class="ch-match__team ch-match__team--right${tbd2 ? " ch-match__team--tbd" : ""}">${t2}</div>
                 ${score}
+                <div class="ch-match__field">Feld ${m.field}</div>
               </div>
             `;
           }).join("")}
