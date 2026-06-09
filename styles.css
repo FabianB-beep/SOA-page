@@ -739,6 +739,181 @@ input, select { font: inherit; color: inherit; }
 .cornhole__image--missing img { display: none; }
 .cornhole__image--missing .cornhole__placeholder-text { display: flex; }
 
+/* ── CORNHOLE TOURNAMENT ─────────────────────────────────────────────────── */
+.cornhole__tabs {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 48px;
+  margin-bottom: 32px;
+}
+
+.cornhole__tab {
+  padding: 10px 32px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: var(--transition);
+  letter-spacing: 0.04em;
+}
+.cornhole__tab:hover { border-color: var(--accent); color: var(--text); }
+.cornhole__tab--active {
+  background: var(--gradient);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 0 16px rgba(204,17,0,0.5);
+}
+
+.cornhole__panel--hidden { display: none; }
+
+.ch-groups {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.ch-group__title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-2);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.ch-teams {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ch-team {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 14px 18px;
+  transition: border-color var(--transition);
+}
+.ch-team:hover { border-color: rgba(204,17,0,0.35); }
+
+.ch-team__num {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent);
+  min-width: 28px;
+  text-align: center;
+}
+
+.ch-team__info { flex: 1; }
+.ch-team__name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 3px;
+}
+.ch-team__players {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* Spielplan */
+.ch-rounds { display: flex; flex-direction: column; gap: 32px; }
+
+.ch-round__title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-2);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.ch-matches { display: flex; flex-direction: column; gap: 10px; }
+
+.ch-match {
+  display: grid;
+  grid-template-columns: 60px 1fr auto 1fr 70px;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 14px 18px;
+  transition: border-color var(--transition);
+}
+.ch-match:hover { border-color: rgba(204,17,0,0.3); }
+
+.ch-match--final { border-color: rgba(204,17,0,0.4); background: linear-gradient(135deg, rgba(204,17,0,0.08), rgba(255,68,34,0.04)); }
+
+.ch-match__time {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.ch-match__team {
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ch-match__team--right { text-align: right; }
+.ch-match__team--tbd { color: var(--text-muted); font-weight: 400; font-style: italic; }
+
+.ch-match__vs {
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+
+.ch-match__score {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.ch-match__score--set { color: var(--text); }
+
+.ch-match__field {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+@media (max-width: 640px) {
+  .ch-groups { grid-template-columns: 1fr; }
+
+  .ch-match {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 8px;
+  }
+  .ch-match__time   { font-size: 0.8rem; }
+  .ch-match__team--right { text-align: left; }
+  .ch-match__vs     { text-align: left; }
+  .ch-match__field  { text-align: left; }
+}
+
 /* ── TICKETS ──────────────────────────────────────────────────────────────── */
 .tickets { background: var(--bg); }
 

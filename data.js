@@ -71,6 +71,41 @@ const SHIFTS = [
   { day: 1, name: "Julian Krause",       role: "Service",  shift: "spaet",  time: "16:00 – 00:00", area: "Sanitätsdienst",note: "Sanitätsstation A" },
 ];
 
+// ── CORNHOLE DATA ────────────────────────────────────────────────────────────
+
+const CORNHOLE_TEAMS = [
+  { id: 1, name: "Bachtal Bomber",     group: "A", players: ["Jonas W.", "Markus R."] },
+  { id: 2, name: "Die Holzwerfer",     group: "A", players: ["Stefan K.", "Tobias H."] },
+  { id: 3, name: "Säcke & Söhne",      group: "A", players: ["Axel B.", "Patrick N."] },
+  { id: 4, name: "Wurfmaschinen",      group: "A", players: ["Fabian L.", "Nico S."] },
+  { id: 5, name: "Loch & Weg",         group: "B", players: ["Heiko M.", "Andreas P."] },
+  { id: 6, name: "Team Kaffeesack",    group: "B", players: ["Florian D.", "Julian F."] },
+  { id: 7, name: "Windhagener Adler",  group: "B", players: ["Christian T.", "Simon G."] },
+  { id: 8, name: "Two Bags One Hole",  group: "B", players: ["Lars E.", "Benjamin C."] },
+];
+
+const CORNHOLE_MATCHES = [
+  // ── Gruppenphase ──────────────────────────────────────────────────────────
+  { id: 1,  round: "Gruppenphase", group: "A", field: 1, time: "12:00", team1: 1, team2: 2, score1: null, score2: null },
+  { id: 2,  round: "Gruppenphase", group: "B", field: 2, time: "12:00", team1: 5, team2: 6, score1: null, score2: null },
+  { id: 3,  round: "Gruppenphase", group: "A", field: 1, time: "12:20", team1: 3, team2: 4, score1: null, score2: null },
+  { id: 4,  round: "Gruppenphase", group: "B", field: 2, time: "12:20", team1: 7, team2: 8, score1: null, score2: null },
+  { id: 5,  round: "Gruppenphase", group: "A", field: 1, time: "12:40", team1: 1, team2: 3, score1: null, score2: null },
+  { id: 6,  round: "Gruppenphase", group: "B", field: 2, time: "12:40", team1: 5, team2: 7, score1: null, score2: null },
+  { id: 7,  round: "Gruppenphase", group: "A", field: 1, time: "13:00", team1: 2, team2: 4, score1: null, score2: null },
+  { id: 8,  round: "Gruppenphase", group: "B", field: 2, time: "13:00", team1: 6, team2: 8, score1: null, score2: null },
+  { id: 9,  round: "Gruppenphase", group: "A", field: 1, time: "13:20", team1: 1, team2: 4, score1: null, score2: null },
+  { id: 10, round: "Gruppenphase", group: "B", field: 2, time: "13:20", team1: 5, team2: 8, score1: null, score2: null },
+  { id: 11, round: "Gruppenphase", group: "A", field: 1, time: "13:40", team1: 2, team2: 3, score1: null, score2: null },
+  { id: 12, round: "Gruppenphase", group: "B", field: 2, time: "13:40", team1: 6, team2: 7, score1: null, score2: null },
+  // ── Halbfinale ───────────────────────────────────────────────────────────
+  { id: 13, round: "Halbfinale", group: null, field: 1, time: "14:10", team1: null, team2: null, score1: null, score2: null, label1: "1. Gruppe A", label2: "2. Gruppe B" },
+  { id: 14, round: "Halbfinale", group: null, field: 2, time: "14:10", team1: null, team2: null, score1: null, score2: null, label1: "1. Gruppe B", label2: "2. Gruppe A" },
+  // ── Spiel um Platz 3 & Finale ────────────────────────────────────────────
+  { id: 15, round: "Platz 3",  group: null, field: 1, time: "14:40", team1: null, team2: null, score1: null, score2: null, label1: "Verlierer HF 1", label2: "Verlierer HF 2" },
+  { id: 16, round: "Finale",   group: null, field: 2, time: "14:40", team1: null, team2: null, score1: null, score2: null, label1: "Sieger HF 1",   label2: "Sieger HF 2" },
+];
+
 const DAY_LABELS = {
   // 1: "Fr, 26. Juni",
   1: "Sa, 27. Juni",

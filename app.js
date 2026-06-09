@@ -235,6 +235,78 @@ modalClose.addEventListener("click", closeModal);
 backdrop.addEventListener("click", e => { if (e.target === backdrop) closeModal(); });
 document.addEventListener("keydown", e => { if (e.key === "Escape" && !backdrop.hidden) closeModal(); });
 
+// ── CORNHOLE ─────────────────────────────────────────────────────────────────
+
+function renderCornholeTeams() {
+  ["A", "B"].forEach(group => {
+    const container = document.getElementById(`ch-teams-${group}`);
+    if (!container) return;
+    const teams = CORNHOLE_TEAMS.filter(t => t.group === group);
+    container.innerHTML = teams.map((t, i) => `
+      <div class="ch-team">
+        <div class="ch-team__num">${i + 1}</div>
+        <div class="ch-team__info">
+          <div class="ch-team__name">${t.name}</div>
+          <div class="ch-team__players">${t.players.join(" · ")}</div>
+        </div>
+      </div>
+    `).join("");
+  });
+}
+
+function renderCornholeSchedule() {
+  const container = document.getElementById("ch-schedule");
+  if (!container) return;
+
+  const teamMap = Object.fromEntries(CORNHOLE_TEAMS.map(t => [t.id, t]));
+
+  const rounds = [...new Set(CORNHOLE_MATCHES.map(m => m.round))];
+
+  container.innerHTML = `<div class="ch-rounds">${rounds.map(round => {
+    const matches = CORNHOLE_MATCHES.filter(m => m.round === round);
+    const isFinal = round === "Finale";
+    return `
+      <div>
+        <div class="ch-round__title">${round}</div>
+        <div class="ch-matches">
+          ${matches.map(m => {
+            const t1    = m.team1 ? teamMap[m.team1]?.name : (m.label1 || "TBD");
+            const t2    = m.team2 ? teamMap[m.team2]?.name : (m.label2 || "TBD");
+            const tbd1  = !m.team1;
+            const tbd2  = !m.team2;
+            const score = (m.score1 !== null && m.score2 !== null)
+              ? `<span class="ch-match__score ch-match__score--set">${m.score1}:${m.score2}</span>`
+              : `<span class="ch-match__score">–:–</span>`;
+            return `
+              <div class="ch-match${isFinal ? " ch-match--final" : ""}">
+                <div class="ch-match__time">${m.time} Uhr</div>
+                <div class="ch-match__team${tbd1 ? " ch-match__team--tbd" : ""}">${t1}</div>
+                <div class="ch-match__vs">VS</div>
+                <div class="ch-match__team ch-match__team--right${tbd2 ? " ch-match__team--tbd" : ""}">${t2}</div>
+                ${score}
+              </div>
+            `;
+          }).join("")}
+        </div>
+      </div>
+    `;
+  }).join("")}</div>`;
+}
+
+renderCornholeTeams();
+renderCornholeSchedule();
+
+// Cornhole tab switching
+document.querySelectorAll(".cornhole__tab").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".cornhole__tab").forEach(b => b.classList.remove("cornhole__tab--active"));
+    btn.classList.add("cornhole__tab--active");
+    const tab = btn.dataset.chTab;
+    document.getElementById("ch-panel-teams").classList.toggle("cornhole__panel--hidden", tab !== "teams");
+    document.getElementById("ch-panel-schedule").classList.toggle("cornhole__panel--hidden", tab !== "schedule");
+  });
+});
+
 // ── INTERSECTION OBSERVER (fade-in) ──────────────────────────────────────────
 
 const observer = new IntersectionObserver(entries => {
