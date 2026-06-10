@@ -1,7 +1,7 @@
 #!/bin/sh
-# Setzt den Cache-Busting-Hash in index.html vor jedem Commit.
-# Verwendet den Hash des aktuellen HEAD (letzter Commit) – reicht für Cache Busting.
+# Cache-Busting für alle HTML-Dateien vor jedem Commit.
 
 HASH=$(git rev-parse --short HEAD 2>/dev/null || echo "000000")
-sed -i "s/?v=[a-f0-9]*\"/?v=$HASH\"/g" index.html
-git add index.html
+for f in index.html anreise.html intern.html intern-bereich.html; do
+  [ -f "$f" ] && sed -i "s/?v=[a-f0-9]*\"/?v=$HASH\"/g" "$f" && git add "$f"
+done
