@@ -148,3 +148,27 @@ const SHIFT_LABELS = {
   spaet:  "Spätschicht",
   nacht:  "Nachtschicht",
 };
+
+// ── INTERNE HELFERDATEN ───────────────────────────────────────────────────────
+
+const HELFER_SLOTS = [
+  // ── Bändchenausgabe ───────────────────────────────────────────────────────
+  { bereich: "Bändchenausgabe", slot: "14:00 – 16:00", helfer: ["Max Mustermann", "Lisa Klein"] },
+  { bereich: "Bändchenausgabe", slot: "16:00 – 19:00", helfer: ["Tom Sauer", "Anna Becker"] },
+  { bereich: "Bändchenausgabe", slot: "19:00 – 22:00", helfer: ["Julia Müller", "Ben Roth"] },
+  // ── Theke ─────────────────────────────────────────────────────────────────
+  { bereich: "Theke", slot: "15:00 – 18:00", helfer: ["Peter Herrmann", "Sandra Vogt", "Kai Fischer"] },
+  { bereich: "Theke", slot: "18:00 – 21:00", helfer: ["Markus Braun", "Laura Neumann", "Stefan Wolf"] },
+  { bereich: "Theke", slot: "21:00 – 00:00", helfer: ["Tobias Lang", "Nina Schäfer", "David Koch"] },
+  { bereich: "Theke", slot: "00:00 – 03:00", helfer: ["Felix Huber", "Lena Walter"] },
+  // ── Grill ─────────────────────────────────────────────────────────────────
+  { bereich: "Grill", slot: "15:00 – 18:00", helfer: ["Christian Schmitt", "Rene Bauer"] },
+  { bereich: "Grill", slot: "18:00 – 21:00", helfer: ["Oliver Stein", "Marco Werner"] },
+  { bereich: "Grill", slot: "21:00 – 00:00", helfer: ["Kevin Jung", "Dennis Pfeiffer"] },
+];
+
+const HELFER_DAUERDIENSTE = [
+  { aufgabe: "Aggi-Dienst",        verantwortlich: "Heiko Holger Hirsch", helfer: [],                            note: "Tankwart – dauerhaft vor Ort" },
+  { aufgabe: "Moderation",         verantwortlich: "Tobias Rechmann",      helfer: [],                            note: "Bühnenansagen & Ablauf Main Stage" },
+  { aufgabe: "Künstlerbetreuung",  verantwortlich: "Fabian Buchmüller",    helfer: ["Andreas Rechmann"],          note: "Backstage, Catering Künstler, Koordination" },
+];

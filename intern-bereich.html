@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Helferplan – S:O:A 2026</title>
+  <link rel="stylesheet" href="styles.css?v=be4f3cb" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <meta name="theme-color" content="#0a0003" />
+  <style>
+    .intern { padding: 100px 0 80px; }
+
+    /* Header */
+    .intern__topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .intern__logout {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 7px 18px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .intern__logout:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* Section title */
+    .intern__section-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Helferplan nach Bereichen */
+    .hp-bereiche { display: flex; flex-direction: column; gap: 40px; margin-bottom: 56px; }
+
+    .hp-bereich__name {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-2);
+      margin-bottom: 12px;
+    }
+
+    .hp-slots { display: flex; flex-direction: column; gap: 8px; }
+
+    .hp-slot {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      align-items: start;
+      gap: 16px;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 12px 18px;
+    }
+    .hp-slot__time {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent-2);
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+    .hp-slot__helfer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .hp-slot__name {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .hp-slot__empty {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* Dauerdienste */
+    .hp-dauerdienste { display: flex; flex-direction: column; gap: 10px; }
+
+    .hp-dauer {
+      display: grid;
+      grid-template-columns: 200px 1fr auto;
+      align-items: start;
+      gap: 16px;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 14px 18px;
+    }
+    .hp-dauer__aufgabe {
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .hp-dauer__personen { display: flex; flex-wrap: wrap; gap: 6px; align-items: flex-start; }
+    .hp-dauer__name {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+    .hp-dauer__name--lead {
+      border-color: rgba(204,17,0,0.4);
+      color: var(--text);
+    }
+    .hp-dauer__note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-align: right;
+      white-space: nowrap;
+      padding-top: 4px;
+    }
+
+    @media (max-width: 640px) {
+      .hp-slot   { grid-template-columns: 1fr; gap: 8px; }
+      .hp-dauer  { grid-template-columns: 1fr; }
+      .hp-dauer__note { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- AUTH CHECK -->
+  <script>
+    if (sessionStorage.getItem("soa_intern") !== "1") {
+      location.replace("intern.html");
+    }
+  </script>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav__logo">
+      <a href="index.html" style="text-decoration:none;color:inherit">S:O:A<span>26</span></a>
+    </div>
+    <button class="nav__burger" id="burger" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="index.html#home"     class="nav__link">Start</a></li>
+      <li><a href="index.html#lineup"   class="nav__link">Line-Up</a></li>
+      <li><a href="index.html#cornhole" class="nav__link">Cornhole</a></li>
+    </ul>
+  </nav>
+
+  <section class="intern">
+    <div class="container">
+
+      <div class="intern__topbar">
+        <div>
+          <span class="section__tag">Intern</span>
+          <h1 class="section__title" style="margin-bottom:0">Helferplan</h1>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-top:6px">Sa, 27. Juni 2026 · Pfaffenbachtal Windhagen</p>
+        </div>
+        <button class="intern__logout" id="logoutBtn">Abmelden</button>
+      </div>
+
+      <!-- Schichtdienste nach Bereich & Zeitslot -->
+      <div class="intern__section-title">Schichtdienste</div>
+      <div class="hp-bereiche" id="hpBereiche"></div>
+
+      <!-- Dauerdienste -->
+      <div class="intern__section-title">Dauerhafte Dienste & Aufgaben</div>
+      <div class="hp-dauerdienste" id="hpDauerdienste"></div>
+
+    </div>
+  </section>
+
+  <script src="data.js?v=be4f3cb"></script>
+  <script>
+    // Nav
+    const nav      = document.getElementById("nav");
+    const burger   = document.getElementById("burger");
+    const navLinks = document.getElementById("navLinks");
+    window.addEventListener("scroll", () => nav.classList.toggle("nav--scrolled", window.scrollY > 50));
+    burger.addEventListener("click", () => {
+      navLinks.classList.toggle("nav__links--open");
+      burger.classList.toggle("nav__burger--open");
+    });
+
+    // Logout
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      sessionStorage.removeItem("soa_intern");
+      location.replace("intern.html");
+    });
+
+    // Schichtdienste nach Bereich gruppieren
+    function renderSchichtdienste() {
+      const container = document.getElementById("hpBereiche");
+      const bereiche  = [...new Set(HELFER_SLOTS.map(s => s.bereich))];
+
+      container.innerHTML = bereiche.map(bereich => {
+        const slots = HELFER_SLOTS.filter(s => s.bereich === bereich);
+        return `
+          <div>
+            <div class="hp-bereich__name">${bereich}</div>
+            <div class="hp-slots">
+              ${slots.map(s => `
+                <div class="hp-slot">
+                  <div class="hp-slot__time">${s.slot} Uhr</div>
+                  <div class="hp-slot__helfer">
+                    ${s.helfer.length
+                      ? s.helfer.map(n => `<span class="hp-slot__name">${n}</span>`).join("")
+                      : `<span class="hp-slot__empty">Noch nicht besetzt</span>`}
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    // Dauerdienste
+    function renderDauerdienste() {
+      const container = document.getElementById("hpDauerdienste");
+      container.innerHTML = HELFER_DAUERDIENSTE.map(d => `
+        <div class="hp-dauer">
+          <div class="hp-dauer__aufgabe">${d.aufgabe}</div>
+          <div class="hp-dauer__personen">
+            <span class="hp-dauer__name hp-dauer__name--lead">${d.verantwortlich}</span>
+            ${d.helfer.map(n => `<span class="hp-dauer__name">${n}</span>`).join("")}
+          </div>
+          <div class="hp-dauer__note">${d.note}</div>
+        </div>
+      `).join("");
+    }
+
+    renderSchichtdienste();
+    renderDauerdienste();
+  </script>
+
+</body>
+</html>
