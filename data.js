@@ -42,7 +42,7 @@ const LINEUP = [
     url:    "https://www.instagram.com/allesaufzuckerband/",
   },
   {
-    day: 1, stage: "tekkno", time: "23:59", headliner: false,
+    day: 1, stage: "tekkno", time: "AFTER SHOW", headliner: false,
     artist: "Spotify Techno",
     genre:  "Techno",
     origin: "Pfaffenbachtal",
