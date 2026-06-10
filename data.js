@@ -28,7 +28,7 @@ const LINEUP = [
   {
     day: 1, stage: "main", time: "21:45", headliner: false,
     artist: "MIXED PICKLES",
-    genre:  "Art Pop",
+    genre:  "Cover Rock",
     origin: "Kasbach/Ohlenberg",
     desc:   "MIXED PICKLES – bunt, laut und ungekämmt. Noch so eine Cover Band! since März.2025.",
     url:    "https://www.instagram.com/mixedpickles.band/",
