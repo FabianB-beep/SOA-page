@@ -666,9 +666,7 @@ input, select { font: inherit; color: inherit; }
   border: 1px solid var(--border);
   border-radius: var(--r-md);
   padding: 8px 12px;
-  transition: border-color var(--transition);
 }
-.ch-team:hover { border-color: rgba(204,17,0,0.35); }
 
 .ch-team__num {
   font-family: var(--font-display);
