@@ -198,16 +198,14 @@ input, select { font: inherit; color: inherit; }
   text-align: center;
   overflow: hidden;
   padding: 80px 24px 60px;
-  background-image: url('assets/img/stage.png');
-  background-repeat: no-repeat;
-  background-position: center bottom;
-  background-size: 100% auto;
 }
 
 .hero__bg {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 30%, rgba(180,20,0,0.35) 0%, rgba(100,5,0,0.15) 50%, transparent 80%);
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(180,20,0,0.35) 0%, rgba(100,5,0,0.15) 50%, transparent 80%),
+    url('assets/img/stage.png') center bottom / 100% auto no-repeat;
 }
 
 .hero__orb {
