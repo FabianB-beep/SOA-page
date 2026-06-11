@@ -90,8 +90,10 @@ const CORNHOLE_PAIRINGS = {
 
 const CORNHOLE_RESULTS = {
   // Gruppenphase A
-  // 1: [21, 14],
-  // 2: [18, 21],
+  1: [0, 14],
+  2: [18, 21],
+  3: [, ],
+  4: [0, 0],
   // ...
 
   // Gruppenphase B
