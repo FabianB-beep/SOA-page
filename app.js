@@ -161,6 +161,16 @@ document.addEventListener("keydown", e => { if (e.key === "Escape" && !backdrop.
 
 // ── CORNHOLE ─────────────────────────────────────────────────────────────────
 
+// Ergebnisse aus results.js in CORNHOLE_MATCHES einspielen
+if (typeof CORNHOLE_RESULTS !== "undefined") {
+  CORNHOLE_MATCHES.forEach(m => {
+    if (CORNHOLE_RESULTS[m.id]) {
+      m.score1 = CORNHOLE_RESULTS[m.id][0];
+      m.score2 = CORNHOLE_RESULTS[m.id][1];
+    }
+  });
+}
+
 function renderCornholeTeams() {
   // Flache Liste ohne Gruppenaufteilung
   const container = document.getElementById("ch-teams-all");
