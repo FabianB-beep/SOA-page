@@ -71,12 +71,11 @@ function renderLineup() {
   }
 
   grid.innerHTML = filtered.map(a => `
-    <div class="lineup__card${a.headliner ? " lineup__card--headliner" : ""}">
+    <div class="lineup__card">
       <div class="lineup__card-stage">${STAGE_LABELS[a.stage]}</div>
       <div class="lineup__card-time">${a.time}</div>
       <div class="lineup__card-artist">${a.artist}</div>
       <div class="lineup__card-genre">${a.genre}</div>
-      ${a.headliner ? '<div class="lineup__card-hl">Headliner</div>' : ""}
     </div>
   `).join("");
 
@@ -133,12 +132,6 @@ function openModal(act) {
 
   const footer = document.getElementById("modalFooter");
   footer.innerHTML = "";
-  if (act.headliner) {
-    const hl = document.createElement("span");
-    hl.className = "modal__badge modal__badge--hl";
-    hl.textContent = "⭐ Headliner";
-    footer.appendChild(hl);
-  }
   if (act.url) {
     const link = document.createElement("a");
     link.className = "modal__badge";

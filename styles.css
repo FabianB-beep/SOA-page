@@ -436,7 +436,7 @@ input, select { font: inherit; color: inherit; }
 
 .lineup__card {
   background: var(--bg-3);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(204,17,0,0.3);
   border-radius: var(--r-lg);
   padding: 24px;
   transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
@@ -456,10 +456,6 @@ input, select { font: inherit; color: inherit; }
 .lineup__card.visible { opacity: 1; transform: none; transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.25s ease, box-shadow 0.25s ease; }
 .lineup__card:hover { transform: translateY(-4px); border-color: rgba(204,17,0,0.4); box-shadow: var(--shadow); }
 
-.lineup__card--headliner {
-  border-color: rgba(204,17,0,0.4);
-  background: linear-gradient(135deg, rgba(204,17,0,0.12), rgba(204,17,0,0.08));
-}
 
 .lineup__card-stage {
   font-size: 11px;
@@ -483,19 +479,6 @@ input, select { font: inherit; color: inherit; }
 .lineup__card-genre {
   font-size: 0.85rem;
   color: var(--text-muted);
-}
-.lineup__card-hl {
-  display: inline-block;
-  margin-top: 12px;
-  padding: 3px 10px;
-  background: rgba(245,158,11,0.15);
-  border: 1px solid rgba(245,158,11,0.3);
-  color: var(--accent-hot);
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
 }
 
 /* ── BADGES ───────────────────────────────────────────────────────────────── */
@@ -901,11 +884,6 @@ input, select { font: inherit; color: inherit; }
   background: rgba(204,17,0,0.12);
   border: 1px solid rgba(204,17,0,0.25);
   color: var(--accent-2);
-}
-.modal__badge--hl {
-  background: rgba(245,158,11,0.12);
-  border-color: rgba(245,158,11,0.3);
-  color: var(--accent-hot);
 }
 
 /* klickbare Lineup-Kacheln anzeigen */
