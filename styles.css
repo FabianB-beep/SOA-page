@@ -276,27 +276,27 @@ input, select { font: inherit; color: inherit; }
   background: rgba(255,255,255,0.05);
   border: 1px solid var(--border);
   border-radius: var(--r-md);
-  padding: 16px 24px;
-  min-width: 90px;
+  padding: 12px 18px;
+  min-width: 72px;
 }
 .countdown__num {
   font-family: var(--font-display);
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
   line-height: 1;
 }
 .countdown__label {
-  font-size: 11px;
+  font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text-muted);
   margin-top: 4px;
 }
 .countdown__sep {
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 300;
   color: var(--text-muted);
-  padding-bottom: 20px;
+  padding-bottom: 16px;
 }
 .countdown__live { font-size: 1.5rem; color: var(--accent-2); }
 
@@ -972,8 +972,8 @@ input, select { font: inherit; color: inherit; }
   .hero__sub { font-size: 1.05rem; margin-bottom: 28px; }
   .hero__eyebrow { font-size: 12px; }
 
-  .countdown__block { padding: 12px 14px; min-width: 64px; }
-  .countdown__num { font-size: 1.6rem; }
+  .countdown__block { padding: 10px 12px; min-width: 56px; }
+  .countdown__num { font-size: 1.5rem; }
 
   .about__cards { grid-template-columns: 1fr; }
 
@@ -990,8 +990,8 @@ input, select { font: inherit; color: inherit; }
   .container { padding: 0 14px; }
   .section { padding: 56px 0; }
   .countdown__sep { display: none; }
-  .countdown__block { padding: 10px 10px; min-width: 56px; }
-  .countdown__num { font-size: 1.4rem; }
+  .countdown__block { padding: 8px 10px; min-width: 48px; }
+  .countdown__num { font-size: 1.25rem; }
   .stage-filter { gap: 6px; }
   .stage-btn { font-size: 12px; padding: 8px 12px; min-height: 40px; }
   .tab { padding: 10px 16px; font-size: 13px; }
