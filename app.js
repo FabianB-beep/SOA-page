@@ -249,7 +249,7 @@ function renderCornholeSchedule() {
                 <div class="ch-match__vs">VS</div>
                 <div class="ch-match__team ch-match__team--right${tbd2 ? " ch-match__team--tbd" : ""}">${t2}</div>
                 ${score}
-                <div class="ch-match__field">Feld ${m.field}</div>
+                <div class="ch-match__field">${m.group ? `Gruppe ${m.group} · ` : ""}Feld ${m.field}</div>
               </div>
             `;
           }).join("")}
