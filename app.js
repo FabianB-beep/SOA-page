@@ -161,9 +161,14 @@ document.addEventListener("keydown", e => { if (e.key === "Escape" && !backdrop.
 
 // ── CORNHOLE ─────────────────────────────────────────────────────────────────
 
-// Teams, Paarungen und Ergebnisse aus results.js einspielen
+// Teams, Matches, Paarungen und Ergebnisse aus results.js einspielen
 if (typeof CORNHOLE_TEAMS_CONFIG !== "undefined") {
   CORNHOLE_TEAMS_CONFIG.forEach(t => CORNHOLE_TEAMS.push({ ...t, players: [] }));
+}
+if (typeof CORNHOLE_MATCHES_CONFIG !== "undefined") {
+  CORNHOLE_MATCHES_CONFIG.forEach(m => CORNHOLE_MATCHES.push({
+    ...m, team1: null, team2: null, score1: null, score2: null,
+  }));
 }
 if (typeof CORNHOLE_PAIRINGS !== "undefined") {
   CORNHOLE_MATCHES.forEach(m => {

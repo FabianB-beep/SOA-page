@@ -54,50 +54,10 @@ const STAGE_LABELS = {
 
 
 // ── CORNHOLE DATA ────────────────────────────────────────────────────────────
-// 14 Teams · 3 Gruppen · 3 Felder parallel · Start 16:00
-// Gruppe A (5 Teams) → Feld 1 · Gruppe B (5 Teams) → Feld 2 · Gruppe C (4 Teams) → Feld 3
-// Gruppenphase endet ~19:20 (A/B) bzw. ~17:40 (C) · Halbfinale 19:30 · Finale 20:00
+// Alle Cornhole-Daten werden in results.js gepflegt.
 
-const CORNHOLE_TEAMS = [];  // wird aus results.js befüllt
-
-const CORNHOLE_MATCHES = [
-  // ── Gruppenphase A – Feld 1 ───────────────────────────────────────────────
-  { id:  1, round: "Gruppenphase", group: "A", field: 1, time: "16:00", team1: null, team2: null, score1: null, score2: null },
-  { id:  2, round: "Gruppenphase", group: "A", field: 1, time: "16:20", team1: null, team2: null, score1: null, score2: null },
-  { id:  3, round: "Gruppenphase", group: "A", field: 1, time: "16:40", team1: null, team2: null, score1: null, score2: null },
-  { id:  4, round: "Gruppenphase", group: "A", field: 1, time: "17:00", team1: null, team2: null, score1: null, score2: null },
-  { id:  5, round: "Gruppenphase", group: "A", field: 1, time: "17:20", team1: null, team2: null, score1: null, score2: null },
-  { id:  6, round: "Gruppenphase", group: "A", field: 1, time: "17:40", team1: null, team2: null, score1: null, score2: null },
-  { id:  7, round: "Gruppenphase", group: "A", field: 1, time: "18:00", team1: null, team2: null, score1: null, score2: null },
-  { id:  8, round: "Gruppenphase", group: "A", field: 1, time: "18:20", team1: null, team2: null, score1: null, score2: null },
-  { id:  9, round: "Gruppenphase", group: "A", field: 1, time: "18:40", team1: null, team2: null, score1: null, score2: null },
-  { id: 10, round: "Gruppenphase", group: "A", field: 1, time: "19:00", team1: null, team2: null, score1: null, score2: null },
-  // ── Gruppenphase B – Feld 2 ───────────────────────────────────────────────
-  { id: 11, round: "Gruppenphase", group: "B", field: 2, time: "16:00", team1: null, team2: null, score1: null, score2: null },
-  { id: 12, round: "Gruppenphase", group: "B", field: 2, time: "16:20", team1: null, team2: null, score1: null, score2: null },
-  { id: 13, round: "Gruppenphase", group: "B", field: 2, time: "16:40", team1: null, team2: null, score1: null, score2: null },
-  { id: 14, round: "Gruppenphase", group: "B", field: 2, time: "17:00", team1: null, team2: null, score1: null, score2: null },
-  { id: 15, round: "Gruppenphase", group: "B", field: 2, time: "17:20", team1: null, team2: null, score1: null, score2: null },
-  { id: 16, round: "Gruppenphase", group: "B", field: 2, time: "17:40", team1: null, team2: null, score1: null, score2: null },
-  { id: 17, round: "Gruppenphase", group: "B", field: 2, time: "18:00", team1: null, team2: null, score1: null, score2: null },
-  { id: 18, round: "Gruppenphase", group: "B", field: 2, time: "18:20", team1: null, team2: null, score1: null, score2: null },
-  { id: 19, round: "Gruppenphase", group: "B", field: 2, time: "18:40", team1: null, team2: null, score1: null, score2: null },
-  { id: 20, round: "Gruppenphase", group: "B", field: 2, time: "19:00", team1: null, team2: null, score1: null, score2: null },
-  // ── Gruppenphase C – Feld 3 ───────────────────────────────────────────────
-  { id: 21, round: "Gruppenphase", group: "C", field: 3, time: "16:00", team1: null, team2: null, score1: null, score2: null },
-  { id: 22, round: "Gruppenphase", group: "C", field: 3, time: "16:20", team1: null, team2: null, score1: null, score2: null },
-  { id: 23, round: "Gruppenphase", group: "C", field: 3, time: "16:40", team1: null, team2: null, score1: null, score2: null },
-  { id: 24, round: "Gruppenphase", group: "C", field: 3, time: "17:00", team1: null, team2: null, score1: null, score2: null },
-  { id: 25, round: "Gruppenphase", group: "C", field: 3, time: "17:20", team1: null, team2: null, score1: null, score2: null },
-  { id: 26, round: "Gruppenphase", group: "C", field: 3, time: "17:40", team1: null, team2: null, score1: null, score2: null },
-  // ── Halbfinale (19:30) ────────────────────────────────────────────────────
-  { id: 27, round: "Halbfinale", group: null, field: 1, time: "19:30", team1: null, team2: null, score1: null, score2: null, label1: "1. Gruppe A",    label2: "2. Gruppe B"    },
-  { id: 28, round: "Halbfinale", group: null, field: 2, time: "19:30", team1: null, team2: null, score1: null, score2: null, label1: "1. Gruppe B",    label2: "Bester 2. Platz" },
-  { id: 29, round: "Halbfinale", group: null, field: 3, time: "19:30", team1: null, team2: null, score1: null, score2: null, label1: "1. Gruppe C",    label2: "2. Gruppe A"    },
-  // ── Platz 3 & Finale (20:00) ──────────────────────────────────────────────
-  { id: 30, round: "Platz 3", group: null, field: 1, time: "20:00", team1: null, team2: null, score1: null, score2: null, label1: "Verlierer HF 1", label2: "Verlierer HF 2" },
-  { id: 31, round: "Finale",  group: null, field: 2, time: "20:00", team1: null, team2: null, score1: null, score2: null, label1: "Sieger HF 1",    label2: "Sieger HF 2"    },
-];
+const CORNHOLE_TEAMS   = [];  // wird aus results.js befüllt
+const CORNHOLE_MATCHES = [];  // wird aus results.js befüllt
 
 
 // ── INTERNE HELFERDATEN ───────────────────────────────────────────────────────
