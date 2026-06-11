@@ -180,9 +180,10 @@ if (typeof CORNHOLE_PAIRINGS !== "undefined") {
 }
 if (typeof CORNHOLE_RESULTS !== "undefined") {
   CORNHOLE_MATCHES.forEach(m => {
-    if (CORNHOLE_RESULTS[m.id]) {
-      m.score1 = CORNHOLE_RESULTS[m.id][0];
-      m.score2 = CORNHOLE_RESULTS[m.id][1];
+    const r = CORNHOLE_RESULTS[m.id];
+    if (r && typeof r[0] === "number" && typeof r[1] === "number") {
+      m.score1 = r[0];
+      m.score2 = r[1];
     }
   });
 }
