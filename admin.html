@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin – S:O:A 2026</title>
+  <link rel="stylesheet" href="styles.css?v=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <meta name="theme-color" content="#0a0003" />
+  <style>
+    .login-wrap { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; }
+    .login-box { background:var(--bg-2); border:1px solid var(--border); border-radius:20px; padding:48px 40px; width:100%; max-width:400px; text-align:center; }
+    .login-box__logo { font-family:var(--font-display); font-size:2rem; font-weight:900; letter-spacing:-0.02em; margin-bottom:6px; }
+    .login-box__logo span { color:var(--accent); }
+    .login-box__subtitle { font-size:0.85rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:36px; }
+    .login-box__label { display:block; font-size:0.8rem; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; text-align:left; margin-bottom:8px; }
+    .login-box__input { width:100%; background:var(--bg-3); border:1px solid var(--border); border-radius:var(--r-md); padding:12px 16px; color:var(--text); font-size:1rem; font-family:var(--font-body); outline:none; transition:border-color var(--transition); box-sizing:border-box; margin-bottom:20px; }
+    .login-box__input:focus { border-color:var(--accent); }
+    .login-box__btn { width:100%; padding:13px; background:var(--gradient); border:none; border-radius:999px; color:#fff; font-size:0.95rem; font-weight:700; font-family:var(--font-display); letter-spacing:0.05em; cursor:pointer; transition:opacity var(--transition),box-shadow var(--transition); }
+    .login-box__btn:hover { opacity:0.9; box-shadow:0 0 20px rgba(204,17,0,0.4); }
+    .login-box__error { margin-top:16px; font-size:0.85rem; color:var(--accent); min-height:20px; }
+  </style>
+</head>
+<body>
+
+  <div class="login-wrap">
+    <div class="login-box">
+      <div class="login-box__logo">S:O:A<span>26</span></div>
+      <div class="login-box__subtitle">Cornhole Admin</div>
+
+      <label class="login-box__label" for="pwd">Passwort</label>
+      <input class="login-box__input" type="password" id="pwd"
+             placeholder="••••••••••" autocomplete="current-password" />
+      <button class="login-box__btn" id="loginBtn">Anmelden</button>
+      <div class="login-box__error" id="loginError"></div>
+    </div>
+  </div>
+
+  <script>
+    if (localStorage.getItem("soa_admin") === "1") {
+      location.replace("admin-bereich.html");
+    }
+
+    const PWD = "YzBybmhvbGUh"; // base64("c0rnhole!")
+
+    function tryLogin() {
+      const val = document.getElementById("pwd").value;
+      if (btoa(val) === PWD) {
+        localStorage.setItem("soa_admin", "1");
+        location.replace("admin-bereich.html");
+      } else {
+        document.getElementById("loginError").textContent = "Falsches Passwort.";
+        document.getElementById("pwd").value = "";
+        document.getElementById("pwd").focus();
+      }
+    }
+
+    document.getElementById("loginBtn").addEventListener("click", tryLogin);
+    document.getElementById("pwd").addEventListener("keydown", e => {
+      if (e.key === "Enter") tryLogin();
+    });
+  </script>
+
+</body>
+</html>
