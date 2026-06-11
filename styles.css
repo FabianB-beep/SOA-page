@@ -230,10 +230,6 @@ input, select { font: inherit; color: inherit; }
   width: 100%;
   height: auto;
   display: block;
-  object-fit: cover;
-  object-position: center bottom;
-  mix-blend-mode: multiply;
-  opacity: 0.85;
 }
 
 .hero__content { position: relative; z-index: 1; max-width: 800px; }
