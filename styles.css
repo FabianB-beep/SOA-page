@@ -145,8 +145,7 @@ input, select { font: inherit; color: inherit; }
 }
 
 .nav--scrolled {
-  background: rgba(10,0,3,0.92);
-  backdrop-filter: blur(16px);
+  background: rgba(10,0,3,0.97);
   box-shadow: 0 1px 0 var(--border);
   padding: 14px 48px;
 }
