@@ -262,6 +262,73 @@ function renderCornholeSchedule() {
 renderCornholeTeams();
 renderCornholeSchedule();
 
+function renderCornholeTable() {
+  const container = document.getElementById("ch-table");
+  if (!container) return;
+
+  const groupMatches = CORNHOLE_MATCHES.filter(m => m.group !== null);
+
+  // Berechne Statistiken pro Team
+  const stats = {};
+  CORNHOLE_TEAMS.forEach(t => {
+    stats[t.id] = { id: t.id, name: t.name, group: t.group, sp: 0, s: 0, n: 0, pkt: 0 };
+  });
+
+  groupMatches.forEach(m => {
+    if (m.score1 === null || m.score2 === null) return;
+    if (!m.team1 || !m.team2) return;
+    const s1 = stats[m.team1];
+    const s2 = stats[m.team2];
+    if (!s1 || !s2) return;
+
+    s1.sp++;  s2.sp++;
+    s1.pkt += m.score1;
+    s2.pkt += m.score2;
+    if (m.score1 > m.score2) { s1.s++; s2.n++; }
+    else if (m.score2 > m.score1) { s2.s++; s1.n++; }
+  });
+
+  // Pro Gruppe eine Tabelle
+  const groups = ["A", "B", "C"];
+  container.innerHTML = groups.map(group => {
+    const rows = Object.values(stats)
+      .filter(t => t.group === group)
+      .sort((a, b) => b.s - a.s || b.pkt - a.pkt);
+
+    return `
+      <div class="ch-table-group">
+        <div class="ch-round__title">Gruppe ${group}</div>
+        <table class="ch-standings">
+          <thead>
+            <tr>
+              <th class="ch-standings__rank">#</th>
+              <th class="ch-standings__name">Team</th>
+              <th title="Gespielte Spiele">Sp</th>
+              <th title="Siege">S</th>
+              <th title="Niederlagen">N</th>
+              <th title="Cancellation-Punkte">Pkt</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rows.map((t, i) => `
+              <tr class="${i === 0 && t.sp > 0 ? "ch-standings__row--first" : ""}">
+                <td class="ch-standings__rank">${i + 1}</td>
+                <td class="ch-standings__name">${t.name}</td>
+                <td>${t.sp}</td>
+                <td>${t.s}</td>
+                <td>${t.n}</td>
+                <td class="ch-standings__pkt">${t.pkt}</td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      </div>
+    `;
+  }).join("");
+}
+
+renderCornholeTable();
+
 // Cornhole tab switching
 document.querySelectorAll(".cornhole__tab").forEach(btn => {
   btn.addEventListener("click", () => {
@@ -270,6 +337,7 @@ document.querySelectorAll(".cornhole__tab").forEach(btn => {
     const tab = btn.dataset.chTab;
     document.getElementById("ch-panel-teams").classList.toggle("cornhole__panel--hidden", tab !== "teams");
     document.getElementById("ch-panel-schedule").classList.toggle("cornhole__panel--hidden", tab !== "schedule");
+    document.getElementById("ch-panel-table").classList.toggle("cornhole__panel--hidden", tab !== "table");
   });
 });
 
