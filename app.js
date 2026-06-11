@@ -262,69 +262,84 @@ function renderCornholeSchedule() {
 renderCornholeTeams();
 renderCornholeSchedule();
 
-function renderCornholeTable() {
-  const container = document.getElementById("ch-table");
-  if (!container) return;
-
-  const groupMatches = CORNHOLE_MATCHES.filter(m => m.group !== null);
-
-  // Berechne Statistiken pro Team
+function buildStats() {
   const stats = {};
   CORNHOLE_TEAMS.forEach(t => {
     stats[t.id] = { id: t.id, name: t.name, group: t.group, sp: 0, s: 0, n: 0, pkt: 0 };
   });
-
-  groupMatches.forEach(m => {
-    if (m.score1 === null || m.score2 === null) return;
-    if (!m.team1 || !m.team2) return;
-    const s1 = stats[m.team1];
-    const s2 = stats[m.team2];
+  CORNHOLE_MATCHES.filter(m => m.group !== null).forEach(m => {
+    if (m.score1 === null || m.score2 === null || !m.team1 || !m.team2) return;
+    const s1 = stats[m.team1], s2 = stats[m.team2];
     if (!s1 || !s2) return;
-
-    s1.sp++;  s2.sp++;
-    s1.pkt += m.score1;
-    s2.pkt += m.score2;
+    s1.sp++; s2.sp++;
+    s1.pkt += m.score1; s2.pkt += m.score2;
     if (m.score1 > m.score2) { s1.s++; s2.n++; }
     else if (m.score2 > m.score1) { s2.s++; s1.n++; }
   });
+  return stats;
+}
 
-  // Pro Gruppe eine Tabelle
-  const groups = ["A", "B", "C"];
-  container.innerHTML = groups.map(group => {
-    const rows = Object.values(stats)
-      .filter(t => t.group === group)
-      .sort((a, b) => b.s - a.s || b.pkt - a.pkt);
+function standingsTable(rows) {
+  return `
+    <table class="ch-standings">
+      <thead>
+        <tr>
+          <th class="ch-standings__rank">#</th>
+          <th class="ch-standings__name">Team</th>
+          <th title="Gespielte Spiele">Sp</th>
+          <th title="Siege">S</th>
+          <th title="Niederlagen">N</th>
+          <th title="Cancellation-Punkte">Pkt</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rows.map((t, i) => `
+          <tr class="${i === 0 && t.sp > 0 ? "ch-standings__row--first" : ""}">
+            <td class="ch-standings__rank">${i + 1}</td>
+            <td class="ch-standings__name">${t.name}</td>
+            <td>${t.sp}</td>
+            <td>${t.s}</td>
+            <td>${t.n}</td>
+            <td class="ch-standings__pkt">${t.pkt}</td>
+          </tr>
+        `).join("")}
+      </tbody>
+    </table>
+  `;
+}
 
-    return `
-      <div class="ch-table-group">
-        <div class="ch-round__title">Gruppe ${group}</div>
-        <table class="ch-standings">
-          <thead>
-            <tr>
-              <th class="ch-standings__rank">#</th>
-              <th class="ch-standings__name">Team</th>
-              <th title="Gespielte Spiele">Sp</th>
-              <th title="Siege">S</th>
-              <th title="Niederlagen">N</th>
-              <th title="Cancellation-Punkte">Pkt</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${rows.map((t, i) => `
-              <tr class="${i === 0 && t.sp > 0 ? "ch-standings__row--first" : ""}">
-                <td class="ch-standings__rank">${i + 1}</td>
-                <td class="ch-standings__name">${t.name}</td>
-                <td>${t.sp}</td>
-                <td>${t.s}</td>
-                <td>${t.n}</td>
-                <td class="ch-standings__pkt">${t.pkt}</td>
-              </tr>
-            `).join("")}
-          </tbody>
-        </table>
-      </div>
-    `;
-  }).join("");
+let activeTableView = "gruppen";
+
+function renderCornholeTable() {
+  const container = document.getElementById("ch-table");
+  if (!container) return;
+
+  const stats = buildStats();
+  const allTeams = Object.values(stats);
+
+  const viewHtml = activeTableView === "gesamt"
+    ? standingsTable(allTeams.sort((a, b) => b.s - a.s || b.pkt - a.pkt))
+    : ["A", "B", "C"].map(group => `
+        <div class="ch-table-group">
+          <div class="ch-round__title">Gruppe ${group}</div>
+          ${standingsTable(allTeams.filter(t => t.group === group).sort((a, b) => b.s - a.s || b.pkt - a.pkt))}
+        </div>
+      `).join("");
+
+  container.innerHTML = `
+    <div class="ch-table-filter">
+      <button class="ch-table-btn${activeTableView === "gruppen" ? " ch-table-btn--active" : ""}" data-view="gruppen">Gruppen</button>
+      <button class="ch-table-btn${activeTableView === "gesamt"  ? " ch-table-btn--active" : ""}" data-view="gesamt">Gesamt</button>
+    </div>
+    ${viewHtml}
+  `;
+
+  container.querySelectorAll(".ch-table-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      activeTableView = btn.dataset.view;
+      renderCornholeTable();
+    });
+  });
 }
 
 renderCornholeTable();
