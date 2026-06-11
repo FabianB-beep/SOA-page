@@ -990,3 +990,18 @@ input, select { font: inherit; color: inherit; }
 }
 .ch-table-btn:hover { border-color: var(--accent); color: var(--text); }
 .ch-table-btn--active { border-color: var(--accent); color: var(--accent); background: rgba(204,17,0,0.1); }
+
+.ch-match__score--live { color: #ff6b35; }
+.ch-match__live-dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  background: #ff6b35;
+  border-radius: 50%;
+  margin-left: 5px;
+  vertical-align: middle;
+  animation: live-pulse 1.2s ease-in-out infinite;
+}
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.7); }
+}

@@ -239,8 +239,11 @@ function renderCornholeSchedule() {
             const t2    = m.team2 ? teamMap[m.team2]?.name : (m.label2 || "TBD");
             const tbd1  = !m.team1;
             const tbd2  = !m.team2;
-            const score = (m.score1 !== null && m.score2 !== null)
-              ? `<span class="ch-match__score ch-match__score--set">${m.score1}:${m.score2}</span>`
+            const hasScore = m.score1 !== null && m.score2 !== null;
+            const isLive   = hasScore && m.team1 && m.score1 < 21 && m.score2 < 21;
+            const isDone   = hasScore && !isLive;
+            const score = hasScore
+              ? `<span class="ch-match__score${isDone ? " ch-match__score--set" : " ch-match__score--live"}">${m.score1}:${m.score2}${isLive ? ' <span class="ch-match__live-dot"></span>' : ""}</span>`
               : `<span class="ch-match__score">–:–</span>`;
             return `
               <div class="ch-match${isFinal ? " ch-match--final" : ""}">
@@ -269,6 +272,7 @@ function buildStats() {
   });
   CORNHOLE_MATCHES.filter(m => m.group !== null).forEach(m => {
     if (m.score1 === null || m.score2 === null || !m.team1 || !m.team2) return;
+    if (m.score1 < 21 && m.score2 < 21) return; // noch live, nicht werten
     const s1 = stats[m.team1], s2 = stats[m.team2];
     if (!s1 || !s2) return;
     s1.sp++; s2.sp++;
