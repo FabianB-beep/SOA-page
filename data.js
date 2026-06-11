@@ -2,7 +2,7 @@
 
 const LINEUP = [
   {
-    day: 1, stage: "main", time: "17:00", headliner: false,
+    day: 1, stage: "cornhole", time: "17:00", headliner: false,
     artist: "Drops",
     genre:  "80er/90er Pop und Rock",
     origin: "Königswinter",
@@ -52,8 +52,9 @@ const LINEUP = [
 ];
 
 const STAGE_LABELS = {
-  main:   "Main Stage",
-  tekkno: "Tekkno Bunker"
+  main:     "Main Stage",
+  tekkno:   "Tekkno Bunker",
+  cornhole: "Cornhole Stage",
 };
 
 
