@@ -50,11 +50,32 @@
     .re-status--ok  { color:#4caf50; }
     .re-status--err { color:var(--accent); }
 
+    .re-match--ko { grid-template-columns: 52px 1fr; grid-template-rows: auto auto; }
+    .re-match__ko-teams { grid-column: 1 / -1; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .re-match__field-info { grid-column: 1 / -1; font-size: 0.75rem; color: var(--text-muted); }
+    .re-match__select {
+      flex: 1;
+      min-width: 140px;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 7px 10px;
+      color: var(--text);
+      font-size: 0.82rem;
+      font-family: var(--font-body);
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .re-match__select:focus { border-color: var(--accent); }
+
     @media (max-width:600px) {
       .gh-settings__fields { grid-template-columns:1fr; }
       .re-match { grid-template-columns:44px 1fr; grid-template-rows:auto auto; }
       .re-match__score { grid-column:1 / -1; justify-content:center; }
       .re-match__team--right { text-align:left; }
+      .re-match__ko-teams { flex-direction: column; align-items: stretch; }
+      .re-match__select { min-width: unset; }
     }
   </style>
 </head>
@@ -189,6 +210,21 @@
       ghSettings.classList.toggle("gh-settings--open")
     );
 
+    // Team-Dropdown HTML für KO-Matches
+    const teamOptions = CORNHOLE_TEAMS.map(t =>
+      `<option value="${t.id}">${t.name}</option>`
+    ).join("");
+
+    function teamSelect(matchId, side, currentTeamId) {
+      return `
+        <select class="re-match__select" data-match="${matchId}" data-team="${side}">
+          <option value="">– Team wählen –</option>
+          ${CORNHOLE_TEAMS.map(t =>
+            `<option value="${t.id}"${t.id === currentTeamId ? " selected" : ""}>${t.name}</option>`
+          ).join("")}
+        </select>`;
+    }
+
     // Matches rendern
     function renderReMatches() {
       const container = document.getElementById("reMatches");
@@ -202,26 +238,46 @@
             m.round === round && (group ? m.group === group : m.group === null)
           );
           if (!matches.length) return;
+          const isKO  = group === null;
           const label = group ? `Gruppenphase ${group} · Feld ${matches[0].field}` : round;
           html += `<div class="re-group"><div class="re-group__title">${label}</div><div class="re-matches">`;
           matches.forEach(m => {
-            const t1 = m.team1 ? (teamMap[m.team1]?.name || "?") : (m.label1 || "TBD");
-            const t2 = m.team2 ? (teamMap[m.team2]?.name || "?") : (m.label2 || "TBD");
             const v1 = m.score1 !== null ? m.score1 : "";
             const v2 = m.score2 !== null ? m.score2 : "";
-            html += `
-              <div class="re-match">
-                <div class="re-match__time">${m.time}</div>
-                <div class="re-match__team">${t1}</div>
-                <div class="re-match__score">
-                  <input class="re-match__input" type="number" min="0" max="99"
-                         data-match="${m.id}" data-side="1" value="${v1}" placeholder="–" />
-                  <span class="re-match__sep">:</span>
-                  <input class="re-match__input" type="number" min="0" max="99"
-                         data-match="${m.id}" data-side="2" value="${v2}" placeholder="–" />
-                </div>
-                <div class="re-match__team re-match__team--right">${t2}</div>
-              </div>`;
+            if (isKO) {
+              html += `
+                <div class="re-match re-match--ko">
+                  <div class="re-match__time">${m.time}</div>
+                  <div class="re-match__ko-teams">
+                    ${teamSelect(m.id, 1, m.team1)}
+                    <div class="re-match__score">
+                      <input class="re-match__input" type="number" min="0" max="99"
+                             data-match="${m.id}" data-side="1" value="${v1}" placeholder="–" />
+                      <span class="re-match__sep">:</span>
+                      <input class="re-match__input" type="number" min="0" max="99"
+                             data-match="${m.id}" data-side="2" value="${v2}" placeholder="–" />
+                    </div>
+                    ${teamSelect(m.id, 2, m.team2)}
+                  </div>
+                  <div class="re-match__field-info">Feld ${m.field}</div>
+                </div>`;
+            } else {
+              const t1 = teamMap[m.team1]?.name || (m.label1 || "TBD");
+              const t2 = teamMap[m.team2]?.name || (m.label2 || "TBD");
+              html += `
+                <div class="re-match">
+                  <div class="re-match__time">${m.time}</div>
+                  <div class="re-match__team">${t1}</div>
+                  <div class="re-match__score">
+                    <input class="re-match__input" type="number" min="0" max="99"
+                           data-match="${m.id}" data-side="1" value="${v1}" placeholder="–" />
+                    <span class="re-match__sep">:</span>
+                    <input class="re-match__input" type="number" min="0" max="99"
+                           data-match="${m.id}" data-side="2" value="${v2}" placeholder="–" />
+                  </div>
+                  <div class="re-match__team re-match__team--right">${t2}</div>
+                </div>`;
+            }
           });
           html += "</div></div>";
         });
@@ -239,6 +295,17 @@
         if (v1 !== "" && v2 !== "") scores[id] = [Number(v1), Number(v2)];
       });
       return scores;
+    }
+
+    function readKOPairings() {
+      const pairings = {};
+      document.querySelectorAll(".re-match__select[data-team='1']").forEach(sel => {
+        const id  = Number(sel.dataset.match);
+        const sel2 = document.querySelector(`.re-match__select[data-match="${id}"][data-team="2"]`);
+        const t1 = Number(sel.value), t2 = Number(sel2?.value);
+        if (t1 && t2) pairings[id] = [t1, t2];
+      });
+      return pairings;
     }
 
     function buildResultsBlock(scores) {
@@ -263,13 +330,35 @@
       return lines.join("\n");
     }
 
-    function replaceResultsBlock(content, newBlock) {
-      const start = content.indexOf("const CORNHOLE_RESULTS = {");
+    function buildPairingsBlock(koPairings) {
+      // Gruppenphase-Paarungen aus CORNHOLE_PAIRINGS übernehmen, KO-Paarungen ergänzen/überschreiben
+      const merged = { ...CORNHOLE_PAIRINGS, ...koPairings };
+      const groupMatches = CORNHOLE_MATCHES.filter(m => m.group !== null);
+      const koMatches    = CORNHOLE_MATCHES.filter(m => m.group === null);
+      const lines = [
+        "const CORNHOLE_PAIRINGS = {",
+        "  // Gruppenphase A (Teams 1–4)",
+        ...groupMatches.filter(m => m.group === "A").map(m => merged[m.id] ? `  ${m.id}: [${merged[m.id][0]}, ${merged[m.id][1]}],` : "").filter(Boolean),
+        "  // Gruppenphase B (Teams 5–8)",
+        ...groupMatches.filter(m => m.group === "B").map(m => merged[m.id] ? `  ${m.id}: [${merged[m.id][0]}, ${merged[m.id][1]}],` : "").filter(Boolean),
+        "  // Gruppenphase C (Teams 9–12)",
+        ...groupMatches.filter(m => m.group === "C").map(m => merged[m.id] ? `  ${m.id}: [${merged[m.id][0]}, ${merged[m.id][1]}],` : "").filter(Boolean),
+        "  // Halbfinale",
+        ...koMatches.filter(m => m.round === "Halbfinale").map(m => merged[m.id] ? `  ${m.id}: [${merged[m.id][0]}, ${merged[m.id][1]}],` : "").filter(Boolean),
+        "  // Platz 3 & Finale",
+        ...koMatches.filter(m => m.round !== "Halbfinale").map(m => merged[m.id] ? `  ${m.id}: [${merged[m.id][0]}, ${merged[m.id][1]}],` : "").filter(Boolean),
+        "};",
+      ];
+      return lines.join("\n");
+    }
+
+    function replaceBlock(content, varName, newBlock) {
+      const start = content.indexOf(`const ${varName} = {`);
       const end   = content.indexOf("};", start) + 2;
       return content.slice(0, start) + newBlock + content.slice(end);
     }
 
-    async function commitToGitHub(scores) {
+    async function commitToGitHub(scores, koPairings) {
       const token  = localStorage.getItem(LS_TOKEN)  || "";
       const repo   = localStorage.getItem(LS_REPO)   || "";
       const branch = localStorage.getItem(LS_BRANCH) || "main";
@@ -281,16 +370,17 @@
       );
       if (!getRes.ok) throw new Error(`Datei nicht gefunden (${getRes.status}). Token/Repo/Branch prüfen.`);
       const fileData = await getRes.json();
-      const currentContent = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ""))));
-      const newContent = replaceResultsBlock(currentContent, buildResultsBlock(scores));
+      let content = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ""))));
+      content = replaceBlock(content, "CORNHOLE_PAIRINGS", buildPairingsBlock(koPairings));
+      content = replaceBlock(content, "CORNHOLE_RESULTS",  buildResultsBlock(scores));
       const putRes = await fetch(
         `https://api.github.com/repos/${repo}/contents/results.js`,
         {
           method: "PUT",
           headers,
           body: JSON.stringify({
-            message: "Cornhole Ergebnisse aktualisiert",
-            content: btoa(unescape(encodeURIComponent(newContent))),
+            message: "Cornhole Ergebnisse & KO-Paarungen aktualisiert",
+            content: btoa(unescape(encodeURIComponent(content))),
             sha: fileData.sha,
             branch,
           }),
@@ -309,7 +399,7 @@
       status.className = "re-status";
       status.textContent = "Wird gespeichert…";
       try {
-        await commitToGitHub(readScores());
+        await commitToGitHub(readScores(), readKOPairings());
         status.className = "re-status re-status--ok";
         status.textContent = "✓ Erfolgreich committet.";
       } catch (e) {
