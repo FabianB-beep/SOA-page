@@ -226,10 +226,14 @@ input, select { font: inherit; color: inherit; }
   pointer-events: none;
   z-index: 0;
 }
-.hero__stage svg {
+.hero__stage img {
   width: 100%;
   height: auto;
   display: block;
+  object-fit: cover;
+  object-position: center bottom;
+  mix-blend-mode: multiply;
+  opacity: 0.85;
 }
 
 .hero__content { position: relative; z-index: 1; max-width: 800px; }
