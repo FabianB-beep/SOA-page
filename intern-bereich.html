@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Helferplan – S:O:A 2026</title>
-  <link rel="stylesheet" href="styles.css?v=01d5750" />
+  <link rel="stylesheet" href="styles.css?v=a779bef" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -142,6 +142,139 @@
       .hp-dauer  { grid-template-columns: 1fr; }
       .hp-dauer__note { text-align: left; }
     }
+
+    /* ── GitHub Einstellungen ──────────────────────────────────────────── */
+    .gh-settings {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 20px 24px;
+      margin-bottom: 40px;
+    }
+    .gh-settings__toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+    }
+    .gh-settings__toggle-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .gh-settings__toggle-icon { color: var(--text-muted); font-size: 0.8rem; transition: transform 0.2s; }
+    .gh-settings--open .gh-settings__toggle-icon { transform: rotate(180deg); }
+    .gh-settings__fields {
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .gh-settings--open .gh-settings__fields { display: grid; }
+    .gh-settings__field { display: flex; flex-direction: column; gap: 6px; }
+    .gh-settings__field--full { grid-column: 1 / -1; }
+    .gh-settings__label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; }
+    .gh-settings__input {
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 9px 12px;
+      color: var(--text);
+      font-size: 0.85rem;
+      font-family: var(--font-body);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .gh-settings__input:focus { border-color: var(--accent); }
+    .gh-settings__status {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: #4caf50;
+      min-height: 18px;
+    }
+
+    /* ── Ergebniseingabe ───────────────────────────────────────────────── */
+    .re-group { margin-bottom: 32px; }
+    .re-group__title {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-2);
+      margin-bottom: 10px;
+    }
+    .re-matches { display: flex; flex-direction: column; gap: 6px; }
+    .re-match {
+      display: grid;
+      grid-template-columns: 52px 1fr auto 1fr;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 10px 14px;
+    }
+    .re-match__time { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; white-space: nowrap; }
+    .re-match__team { font-size: 0.85rem; font-weight: 500; }
+    .re-match__team--right { text-align: right; }
+    .re-match__score {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .re-match__input {
+      width: 48px;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 0;
+      text-align: center;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-family: var(--font-display);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .re-match__input:focus { border-color: var(--accent); }
+    .re-match__sep { color: var(--text-muted); font-weight: 700; }
+    .re-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+    .re-save-btn {
+      padding: 12px 32px;
+      background: var(--gradient);
+      border: none;
+      border-radius: 999px;
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      font-family: var(--font-display);
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: opacity 0.2s, box-shadow 0.2s;
+    }
+    .re-save-btn:hover { opacity: 0.9; box-shadow: 0 0 20px rgba(204,17,0,0.4); }
+    .re-save-btn:disabled { opacity: 0.4; cursor: default; box-shadow: none; }
+    .re-status { font-size: 0.85rem; color: var(--text-muted); min-height: 20px; }
+    .re-status--ok  { color: #4caf50; }
+    .re-status--err { color: var(--accent); }
+
+    @media (max-width: 600px) {
+      .gh-settings__fields { grid-template-columns: 1fr; }
+      .re-match { grid-template-columns: 44px 1fr; grid-template-rows: auto auto; }
+      .re-match__score { grid-column: 1 / -1; justify-content: center; }
+      .re-match__team--right { text-align: left; }
+    }
   </style>
 </head>
 <body>
@@ -189,10 +322,45 @@
       <div class="intern__section-title">Dauerhafte Dienste & Aufgaben</div>
       <div class="hp-dauerdienste" id="hpDauerdienste"></div>
 
+      <!-- Cornhole Ergebnisse -->
+      <div class="intern__section-title" style="margin-top:56px">Cornhole Ergebnisse</div>
+
+      <!-- GitHub Einstellungen -->
+      <div class="gh-settings" id="ghSettings">
+        <div class="gh-settings__toggle" id="ghToggle">
+          <span class="gh-settings__toggle-label">GitHub Einstellungen</span>
+          <span class="gh-settings__toggle-icon">▼</span>
+        </div>
+        <div class="gh-settings__fields">
+          <div class="gh-settings__field gh-settings__field--full">
+            <label class="gh-settings__label">Personal Access Token</label>
+            <input class="gh-settings__input" type="password" id="ghToken" placeholder="ghp_…" autocomplete="off" />
+          </div>
+          <div class="gh-settings__field">
+            <label class="gh-settings__label">Repository</label>
+            <input class="gh-settings__input" type="text" id="ghRepo" placeholder="owner/repo" />
+          </div>
+          <div class="gh-settings__field">
+            <label class="gh-settings__label">Branch</label>
+            <input class="gh-settings__input" type="text" id="ghBranch" placeholder="main" />
+          </div>
+        </div>
+        <div class="gh-settings__status" id="ghSettingsStatus"></div>
+      </div>
+
+      <!-- Match-Eingabe -->
+      <div id="reMatches"></div>
+
+      <div class="re-actions">
+        <button class="re-save-btn" id="reSaveBtn">Speichern & Committen</button>
+        <span class="re-status" id="reStatus"></span>
+      </div>
+
     </div>
   </section>
 
-  <script src="data.js?v=01d5750"></script>
+  <script src="data.js?v=a779bef"></script>
+  <script src="results.js?v=a779bef"></script>
   <script>
     // Nav
     const nav      = document.getElementById("nav");
@@ -254,6 +422,202 @@
 
     renderSchichtdienste();
     renderDauerdienste();
+
+    // ── CORNHOLE ERGEBNISSE ──────────────────────────────────────────────────
+
+    // Daten zusammenführen (wie in app.js)
+    if (typeof CORNHOLE_TEAMS_CONFIG !== "undefined")
+      CORNHOLE_TEAMS_CONFIG.forEach(t => CORNHOLE_TEAMS.push({ ...t, players: [] }));
+    if (typeof CORNHOLE_MATCHES_CONFIG !== "undefined")
+      CORNHOLE_MATCHES_CONFIG.forEach(m => CORNHOLE_MATCHES.push({ ...m, team1: null, team2: null, score1: null, score2: null }));
+    if (typeof CORNHOLE_PAIRINGS !== "undefined")
+      CORNHOLE_MATCHES.forEach(m => {
+        if (CORNHOLE_PAIRINGS[m.id]) { m.team1 = CORNHOLE_PAIRINGS[m.id][0]; m.team2 = CORNHOLE_PAIRINGS[m.id][1]; }
+      });
+    if (typeof CORNHOLE_RESULTS !== "undefined")
+      CORNHOLE_MATCHES.forEach(m => {
+        const r = CORNHOLE_RESULTS[m.id];
+        if (r && typeof r[0] === "number" && typeof r[1] === "number") { m.score1 = r[0]; m.score2 = r[1]; }
+      });
+
+    const teamMap = Object.fromEntries(CORNHOLE_TEAMS.map(t => [t.id, t]));
+
+    // GitHub Einstellungen (localStorage)
+    const LS_TOKEN  = "soa_gh_token";
+    const LS_REPO   = "soa_gh_repo";
+    const LS_BRANCH = "soa_gh_branch";
+
+    const ghTokenEl  = document.getElementById("ghToken");
+    const ghRepoEl   = document.getElementById("ghRepo");
+    const ghBranchEl = document.getElementById("ghBranch");
+
+    ghTokenEl.value  = localStorage.getItem(LS_TOKEN)  || "";
+    ghRepoEl.value   = localStorage.getItem(LS_REPO)   || "fabianb-beep/soa-page";
+    ghBranchEl.value = localStorage.getItem(LS_BRANCH) || "main";
+
+    [ghTokenEl, ghRepoEl, ghBranchEl].forEach(el => {
+      el.addEventListener("input", () => {
+        localStorage.setItem(LS_TOKEN,  ghTokenEl.value.trim());
+        localStorage.setItem(LS_REPO,   ghRepoEl.value.trim());
+        localStorage.setItem(LS_BRANCH, ghBranchEl.value.trim());
+        document.getElementById("ghSettingsStatus").textContent = "Gespeichert.";
+        setTimeout(() => document.getElementById("ghSettingsStatus").textContent = "", 1500);
+      });
+    });
+
+    // Settings-Toggle (offen wenn Token fehlt)
+    const ghSettings = document.getElementById("ghSettings");
+    if (!ghTokenEl.value) ghSettings.classList.add("gh-settings--open");
+    document.getElementById("ghToggle").addEventListener("click", () =>
+      ghSettings.classList.toggle("gh-settings--open")
+    );
+
+    // Matches rendern
+    function renderReMatches() {
+      const container = document.getElementById("reMatches");
+      const rounds = ["Gruppenphase", "Halbfinale", "Platz 3", "Finale"];
+      const groups = { Gruppenphase: ["A", "B", "C"] };
+
+      let html = "";
+      rounds.forEach(round => {
+        const subGroups = groups[round] || [null];
+        subGroups.forEach(group => {
+          const matches = CORNHOLE_MATCHES.filter(m =>
+            m.round === round && (group ? m.group === group : m.group === null)
+          );
+          if (!matches.length) return;
+          const label = group ? `Gruppenphase ${group} · Feld ${matches[0].field}` : round;
+          html += `<div class="re-group"><div class="re-group__title">${label}</div><div class="re-matches">`;
+          matches.forEach(m => {
+            const t1 = m.team1 ? (teamMap[m.team1]?.name || "?") : (m.label1 || "TBD");
+            const t2 = m.team2 ? (teamMap[m.team2]?.name || "?") : (m.label2 || "TBD");
+            const v1 = m.score1 !== null ? m.score1 : "";
+            const v2 = m.score2 !== null ? m.score2 : "";
+            html += `
+              <div class="re-match">
+                <div class="re-match__time">${m.time}</div>
+                <div class="re-match__team">${t1}</div>
+                <div class="re-match__score">
+                  <input class="re-match__input" type="number" min="0" max="99"
+                         data-match="${m.id}" data-side="1" value="${v1}" placeholder="–" />
+                  <span class="re-match__sep">:</span>
+                  <input class="re-match__input" type="number" min="0" max="99"
+                         data-match="${m.id}" data-side="2" value="${v2}" placeholder="–" />
+                </div>
+                <div class="re-match__team re-match__team--right">${t2}</div>
+              </div>`;
+          });
+          html += "</div></div>";
+        });
+      });
+      container.innerHTML = html;
+    }
+    renderReMatches();
+
+    // Aktuellen Eingabestand auslesen
+    function readScores() {
+      const scores = {};
+      document.querySelectorAll(".re-match__input[data-side='1']").forEach(input => {
+        const id = Number(input.dataset.match);
+        const other = document.querySelector(`.re-match__input[data-match="${id}"][data-side="2"]`);
+        const v1 = input.value.trim();
+        const v2 = other?.value.trim();
+        if (v1 !== "" && v2 !== "") scores[id] = [Number(v1), Number(v2)];
+      });
+      return scores;
+    }
+
+    // CORNHOLE_RESULTS-Block aus Dateinhalt extrahieren & ersetzen
+    function buildResultsBlock(scores) {
+      const lines = ["const CORNHOLE_RESULTS = {"];
+      const groupMatches = CORNHOLE_MATCHES.filter(m => m.group !== null);
+      ["A", "B", "C"].forEach(g => {
+        lines.push(`  // Gruppenphase ${g}`);
+        groupMatches.filter(m => m.group === g).forEach(m => {
+          if (scores[m.id]) lines.push(`  ${m.id}: [${scores[m.id][0]}, ${scores[m.id][1]}],`);
+        });
+      });
+      const koMatches = CORNHOLE_MATCHES.filter(m => m.group === null);
+      lines.push("  // Halbfinale");
+      koMatches.filter(m => m.round === "Halbfinale").forEach(m => {
+        if (scores[m.id]) lines.push(`  ${m.id}: [${scores[m.id][0]}, ${scores[m.id][1]}],`);
+      });
+      lines.push("  // Platz 3 & Finale");
+      koMatches.filter(m => m.round !== "Halbfinale").forEach(m => {
+        if (scores[m.id]) lines.push(`  ${m.id}: [${scores[m.id][0]}, ${scores[m.id][1]}],`);
+      });
+      lines.push("};");
+      return lines.join("\n");
+    }
+
+    function replaceResultsBlock(content, newBlock) {
+      const start = content.indexOf("const CORNHOLE_RESULTS = {");
+      const end   = content.indexOf("};", start) + 2;
+      return content.slice(0, start) + newBlock + content.slice(end);
+    }
+
+    // GitHub API commit
+    async function commitToGitHub(scores) {
+      const token  = localStorage.getItem(LS_TOKEN)  || "";
+      const repo   = localStorage.getItem(LS_REPO)   || "";
+      const branch = localStorage.getItem(LS_BRANCH) || "main";
+      const path   = "results.js";
+
+      if (!token) throw new Error("Kein GitHub Token hinterlegt.");
+      if (!repo)  throw new Error("Kein Repository hinterlegt.");
+
+      const headers = { Authorization: `Bearer ${token}`, "Content-Type": "application/json" };
+
+      // 1. Aktuelle Datei + SHA laden
+      const getRes = await fetch(
+        `https://api.github.com/repos/${repo}/contents/${path}?ref=${branch}`,
+        { headers }
+      );
+      if (!getRes.ok) throw new Error(`Datei nicht gefunden (${getRes.status}). Token/Repo/Branch prüfen.`);
+      const fileData = await getRes.json();
+      const currentContent = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ""))));
+
+      // 2. Neuen Inhalt bauen
+      const newContent = replaceResultsBlock(currentContent, buildResultsBlock(scores));
+
+      // 3. Committen
+      const putRes = await fetch(
+        `https://api.github.com/repos/${repo}/contents/${path}`,
+        {
+          method: "PUT",
+          headers,
+          body: JSON.stringify({
+            message: "Cornhole Ergebnisse aktualisiert",
+            content: btoa(unescape(encodeURIComponent(newContent))),
+            sha: fileData.sha,
+            branch,
+          }),
+        }
+      );
+      if (!putRes.ok) {
+        const err = await putRes.json();
+        throw new Error(err.message || `Fehler ${putRes.status}`);
+      }
+    }
+
+    // Speichern-Button
+    document.getElementById("reSaveBtn").addEventListener("click", async () => {
+      const btn    = document.getElementById("reSaveBtn");
+      const status = document.getElementById("reStatus");
+      btn.disabled = true;
+      status.className = "re-status";
+      status.textContent = "Wird gespeichert…";
+      try {
+        await commitToGitHub(readScores());
+        status.className = "re-status re-status--ok";
+        status.textContent = "✓ Erfolgreich committet.";
+      } catch (e) {
+        status.className = "re-status re-status--err";
+        status.textContent = "✗ " + e.message;
+      } finally {
+        btn.disabled = false;
+      }
+    });
   </script>
 
 </body>
