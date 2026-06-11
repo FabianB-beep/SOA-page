@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spielplan – S:O:A 2026</title>
+  <link rel="stylesheet" href="styles.css?v=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <meta name="theme-color" content="#0a0003" />
+  <style>
+    .spielplan-page { padding: 100px 0 80px; min-height: 100vh; }
+    .spielplan-page__topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .spielplan-page__close {
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+    .spielplan-page__close:hover { border-color: var(--accent); color: var(--accent); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav__logo"><a href="index.html" style="text-decoration:none;color:inherit">S:O:A<span>26</span></a></div>
+    <button class="nav__burger" id="burger" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="index.html#home"     class="nav__link">Start</a></li>
+      <li><a href="index.html#about"    class="nav__link">Über uns</a></li>
+      <li><a href="index.html#lineup"   class="nav__link">Line-Up</a></li>
+      <li><a href="index.html#cornhole" class="nav__link">Cornhole</a></li>
+      <li><a href="anreise.html"        class="nav__link">Anreise</a></li>
+    </ul>
+  </nav>
+
+  <section class="spielplan-page">
+    <div class="container">
+
+      <div class="spielplan-page__topbar">
+        <div>
+          <span class="section__tag">Cornhole Turnier</span>
+          <h1 class="section__title" style="margin-bottom:0">Spielplan</h1>
+          <p style="color:var(--text-muted);font-size:0.9rem;margin-top:6px">Sa, 27. Juni 2026 · ab 16:00 Uhr</p>
+        </div>
+        <a href="index.html#cornhole" class="spielplan-page__close" aria-label="Schließen">✕</a>
+      </div>
+
+      <div id="ch-schedule"></div>
+
+    </div>
+  </section>
+
+  <script src="data.js?v=1"></script>
+  <script src="results.js?v=1"></script>
+  <script>
+    // Nav
+    const nav      = document.getElementById("nav");
+    const burger   = document.getElementById("burger");
+    const navLinks = document.getElementById("navLinks");
+    window.addEventListener("scroll", () => nav.classList.toggle("nav--scrolled", window.scrollY > 50));
+    burger.addEventListener("click", () => {
+      navLinks.classList.toggle("nav__links--open");
+      burger.classList.toggle("nav__burger--open");
+    });
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("nav__links--open");
+        burger.classList.remove("nav__burger--open");
+      });
+    });
+
+    // Teams, Paarungen und Ergebnisse einspielen
+    if (typeof CORNHOLE_TEAMS_CONFIG !== "undefined") {
+      CORNHOLE_TEAMS_CONFIG.forEach(t => CORNHOLE_TEAMS.push({ ...t, players: [] }));
+    }
+    if (typeof CORNHOLE_PAIRINGS !== "undefined") {
+      CORNHOLE_MATCHES.forEach(m => {
+        if (CORNHOLE_PAIRINGS[m.id]) { m.team1 = CORNHOLE_PAIRINGS[m.id][0]; m.team2 = CORNHOLE_PAIRINGS[m.id][1]; }
+      });
+    }
+    if (typeof CORNHOLE_RESULTS !== "undefined") {
+      CORNHOLE_MATCHES.forEach(m => {
+        if (CORNHOLE_RESULTS[m.id]) { m.score1 = CORNHOLE_RESULTS[m.id][0]; m.score2 = CORNHOLE_RESULTS[m.id][1]; }
+      });
+    }
+
+    // Spielplan rendern
+    const container = document.getElementById("ch-schedule");
+    const teamMap   = Object.fromEntries(CORNHOLE_TEAMS.map(t => [t.id, t]));
+    const rounds    = [...new Set(CORNHOLE_MATCHES.map(m => m.round))];
+
+    container.innerHTML = `<div class="ch-rounds">${rounds.map(round => {
+      const matches = CORNHOLE_MATCHES.filter(m => m.round === round);
+      const isFinal = round === "Finale";
+      return `
+        <div>
+          <div class="ch-round__title">${round}</div>
+          <div class="ch-matches">
+            ${matches.map(m => {
+              const t1    = m.team1 ? teamMap[m.team1]?.name : (m.label1 || "TBD");
+              const t2    = m.team2 ? teamMap[m.team2]?.name : (m.label2 || "TBD");
+              const tbd1  = !m.team1;
+              const tbd2  = !m.team2;
+              const score = (m.score1 !== null && m.score2 !== null)
+                ? `<span class="ch-match__score ch-match__score--set">${m.score1}:${m.score2}</span>`
+                : `<span class="ch-match__score">–:–</span>`;
+              return `
+                <div class="ch-match${isFinal ? " ch-match--final" : ""}">
+                  <div class="ch-match__time">${m.time} Uhr</div>
+                  <div class="ch-match__team${tbd1 ? " ch-match__team--tbd" : ""}">${t1}</div>
+                  <div class="ch-match__vs">VS</div>
+                  <div class="ch-match__team ch-match__team--right${tbd2 ? " ch-match__team--tbd" : ""}">${t2}</div>
+                  ${score}
+                  <div class="ch-match__field">Feld ${m.field}</div>
+                </div>
+              `;
+            }).join("")}
+          </div>
+        </div>
+      `;
+    }).join("")}</div>`;
+  </script>
+
+</body>
+</html>
