@@ -953,11 +953,11 @@ input, select { font: inherit; color: inherit; }
     justify-content: center;
     align-items: center;
     gap: 40px;
-    z-index: 99;
+    z-index: 999;
   }
   .nav__links--open { display: flex; }
   .nav__link { font-size: 1.5rem; }
-  .nav__burger { display: flex; z-index: 100; }
+  .nav__burger { display: flex; z-index: 1000; position: relative; }
 
   .about__grid { grid-template-columns: 1fr; gap: 40px; }
   .about__cards { grid-template-columns: 1fr 1fr; }
