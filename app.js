@@ -169,11 +169,25 @@ document.addEventListener("keydown", e => { if (e.key === "Escape" && !backdrop.
 // ── CORNHOLE ─────────────────────────────────────────────────────────────────
 
 function renderCornholeTeams() {
+  // Flache Liste ohne Gruppenaufteilung
+  const container = document.getElementById("ch-teams-all");
+  if (container) {
+    container.innerHTML = CORNHOLE_TEAMS.map((t, i) => `
+      <div class="ch-team">
+        <div class="ch-team__num">${i + 1}</div>
+        <div class="ch-team__info">
+          <div class="ch-team__name">${t.name}</div>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  /* Gruppenansicht – einkommentieren sobald Gruppen feststehen:
   ["A", "B", "C"].forEach(group => {
-    const container = document.getElementById(`ch-teams-${group}`);
-    if (!container) return;
+    const cont = document.getElementById(`ch-teams-${group}`);
+    if (!cont) return;
     const teams = CORNHOLE_TEAMS.filter(t => t.group === group);
-    container.innerHTML = teams.map((t, i) => `
+    cont.innerHTML = teams.map((t, i) => `
       <div class="ch-team">
         <div class="ch-team__num">${i + 1}</div>
         <div class="ch-team__info">
@@ -183,6 +197,7 @@ function renderCornholeTeams() {
       </div>
     `).join("");
   });
+  */
 }
 
 function renderCornholeSchedule() {

@@ -64,23 +64,19 @@ const STAGE_LABELS = {
 // Gruppenphase endet ~19:20 (A/B) bzw. ~17:40 (C) · Halbfinale 19:30 · Finale 20:00
 
 const CORNHOLE_TEAMS = [
-  // Gruppe A – Feld 1
-  { id:  1, name: "Bachtal Bomber",     group: "A", players: ["Jonas W.",     "Markus R."]    },
-  { id:  2, name: "Die Holzwerfer",     group: "A", players: ["Stefan K.",    "Tobias H."]    },
-  { id:  3, name: "Säcke & Söhne",      group: "A", players: ["Axel B.",      "Patrick N."]   },
-  { id:  4, name: "Wurfmaschinen",      group: "A", players: ["Fabian L.",    "Nico S."]      },
-  { id:  5, name: "Loch & Weg",         group: "A", players: ["Heiko M.",     "Andreas P."]   },
-  // Gruppe B – Feld 2
-  { id:  6, name: "Team Kaffeesack",    group: "B", players: ["Florian D.",   "Julian F."]    },
-  { id:  7, name: "Windhagener Adler",  group: "B", players: ["Christian T.", "Simon G."]     },
-  { id:  8, name: "Two Bags One Hole",  group: "B", players: ["Lars E.",      "Benjamin C."]  },
-  { id:  9, name: "Sackgesichter",      group: "B", players: ["Michael B.",   "Rene K."]      },
-  { id: 10, name: "Zielwasser e.V.",    group: "B", players: ["Dirk H.",      "Thorsten M."]  },
-  // Gruppe C – Feld 3
-  { id: 11, name: "Vollpfosten FC",     group: "C", players: ["Oliver S.",    "Marco W."]     },
-  { id: 12, name: "Brettl & Sack",      group: "C", players: ["Kevin J.",     "Dennis P."]    },
-  { id: 13, name: "Die Ungeworfenen",   group: "C", players: ["Timo R.",      "Philipp N."]   },
-  { id: 14, name: "Airball United",     group: "C", players: ["Sebastian L.", "Alexander F."] },
+  // Gruppen-Zuteilung für spätere Nutzung (A/B/C) – aktuell nur Teamname angezeigt
+  { id:  1, name: "Awmb,akwmv",                      group: "A", players: [] },
+  { id:  2, name: "...die Bio-Mechanischen",          group: "A", players: [] },
+  { id:  3, name: "PWG Turbo",                        group: "A", players: [] },
+  { id:  4, name: "MUPPETS",                          group: "A", players: [] },
+  { id:  5, name: "Pommes & Champagner",              group: "B", players: [] },
+  { id:  6, name: "Die Bio-Mechanischen-Weltraumstiere", group: "B", players: [] },
+  { id:  7, name: "Unicorns",                         group: "B", players: [] },
+  { id:  8, name: "Two Girls one Sack",               group: "B", players: [] },
+  { id:  9, name: "Team Hecken Frisch-Vermählt",      group: "C", players: [] },
+  { id: 10, name: "Die brunftigen Beutel Boys",       group: "C", players: [] },
+  { id: 11, name: "Mais-ter Mädels",                  group: "C", players: [] },
+  { id: 12, name: "Die Beutelbrüder",                 group: "C", players: [] },
 ];
 
 const CORNHOLE_MATCHES = [
