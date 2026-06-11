@@ -204,6 +204,7 @@ input, select { font: inherit; color: inherit; }
   position: absolute;
   inset: 0;
   background:
+    linear-gradient(to bottom, transparent 60%, #000 100%),
     radial-gradient(ellipse at 50% 30%, rgba(180,20,0,0.35) 0%, rgba(100,5,0,0.15) 50%, transparent 80%),
     linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
     url('assets/img/stage.png') center bottom / 100% auto no-repeat;
