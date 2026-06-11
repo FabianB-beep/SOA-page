@@ -224,7 +224,7 @@ input, select { font: inherit; color: inherit; }
   right: 0;
   width: 100%;
   pointer-events: none;
-  z-index: 0;
+  z-index: 2;
 }
 .hero__stage img {
   width: 100%;
