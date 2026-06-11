@@ -277,9 +277,8 @@ function buildStats() {
     const s1 = stats[m.team1], s2 = stats[m.team2];
     if (!s1 || !s2) return;
     s1.sp++; s2.sp++;
-    s1.pkt += m.score1; s2.pkt += m.score2;
-    if (m.score1 > m.score2) { s1.s++; s2.n++; }
-    else if (m.score2 > m.score1) { s2.s++; s1.n++; }
+    if (m.score1 > m.score2) { s1.s++; s2.n++; s1.pkt += m.score1 - m.score2; }
+    else if (m.score2 > m.score1) { s2.s++; s1.n++; s2.pkt += m.score2 - m.score1; }
   });
   return stats;
 }
