@@ -105,11 +105,6 @@ const CORNHOLE_PAIRINGS = {
 
 const CORNHOLE_RESULTS = {
   // Gruppenphase A
-  1: [0, 10],
-  2: [18, 21],
-  3: [1, 3],
-  4: [0, 0],
-  5: [2, 6],
   // Gruppenphase B
   // Gruppenphase C
   // Halbfinale
