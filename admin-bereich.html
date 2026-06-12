@@ -304,7 +304,7 @@
         const id  = Number(sel.dataset.match);
         const sel2 = document.querySelector(`.re-match__select[data-match="${id}"][data-team="2"]`);
         const t1 = Number(sel.value), t2 = Number(sel2?.value);
-        if (t1 && t2) pairings[id] = [t1, t2];
+        pairings[id] = (t1 && t2) ? [t1, t2] : null;
       });
       return pairings;
     }
