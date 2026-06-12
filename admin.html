@@ -43,11 +43,16 @@
       location.replace("admin-bereich.html");
     }
 
-    const PWD = "YzBybmhvbGUh"; // base64("c0rnhole!")
+    const PWD_HASH = "7ff16cb1e8d724b2329b54ee9828cc7256f3c8be85b64fbdce54c7ff4e38afa9";
 
-    function tryLogin() {
+    async function sha256(str) {
+      const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    async function tryLogin() {
       const val = document.getElementById("pwd").value;
-      if (btoa(val) === PWD) {
+      if (await sha256(val) === PWD_HASH) {
         localStorage.setItem("soa_admin", "1");
         location.replace("admin-bereich.html");
       } else {
