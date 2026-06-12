@@ -918,7 +918,6 @@ input, select { font: inherit; color: inherit; }
   .nav__links--open { display: flex; }
   .nav__link { font-size: 1.5rem; }
   .nav__burger { display: flex; z-index: 1000; position: relative; }
-  .nav__quicklinks { display: none; }
 
   .about__grid { grid-template-columns: 1fr; gap: 40px; }
   .about__cards { grid-template-columns: 1fr 1fr; }
