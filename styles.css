@@ -140,6 +140,7 @@ input, select { font: inherit; color: inherit; }
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   padding: 20px 48px;
   transition: background var(--transition), box-shadow var(--transition), padding var(--transition);
 }
@@ -168,6 +169,8 @@ input, select { font: inherit; color: inherit; }
   display: flex;
   gap: 12px;
 }
+/* mobile: hide quicklinks inside nav__left, show standalone centred row instead */
+.nav__quicklinks--mobile { display: none; }
 .nav__quicklink {
   font-size: 13px;
   font-weight: 500;
@@ -918,6 +921,8 @@ input, select { font: inherit; color: inherit; }
   .nav__links--open { display: flex; }
   .nav__link { font-size: 1.5rem; }
   .nav__burger { display: flex; z-index: 1000; position: relative; }
+  .nav__quicklinks { display: none; }
+  .nav__quicklinks--mobile { display: flex; justify-content: center; gap: 12px; width: 100%; padding: 6px 0 2px; }
 
   .about__grid { grid-template-columns: 1fr; gap: 40px; }
   .about__cards { grid-template-columns: 1fr 1fr; }
