@@ -68,7 +68,7 @@
   </section>
 
   <script src="data.js?v=1"></script>
-  <script src="results.js?v=1"></script>
+  <script>document.write('<script src="results.js?v=' + Date.now() + '"><\/script>')</script>
   <script>
     // Nav
     const nav      = document.getElementById("nav");
