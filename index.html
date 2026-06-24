@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>S:O:A 2026</title>
-  <link rel="stylesheet" href="styles.css?v=0dcb6a7" />
+  <link rel="stylesheet" href="styles.css?v=fe1e97e" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -241,31 +241,39 @@
 
   <script>
   (function(){
-    var WMO = {0:"☀️",1:"🌤️",2:"⛅",3:"☁️",45:"🌫️",48:"🌫️",
-      51:"🌧️",53:"🌧️",55:"🌧️",61:"🌧️",63:"🌧️",65:"🌧️",
-      71:"❄️",73:"❄️",75:"❄️",80:"🌦️",81:"🌦️",82:"🌦️",
-      95:"⛈️",96:"⛈️",99:"⛈️"};
+    var ICON = {"clear-day":"☀️","clear-night":"🌙","partly-cloudy-day":"🌤️","partly-cloudy-night":"⛅",
+      "cloudy":"☁️","fog":"🌫️","wind":"💨","rain":"🌧️","sleet":"🌨️","snow":"❄️","hail":"🌨️","thunderstorm":"⛈️"};
     var DAYS = {"2026-06-26":"Fr, 26.","2026-06-27":"Sa, 27.","2026-06-28":"So, 28."};
-    var url = "https://api.open-meteo.com/v1/forecast?latitude=50.63&longitude=7.35&daily=temperature_2m_max,temperature_2m_min,weather_code&start_date=2026-06-26&end_date=2026-06-28&timezone=Europe%2FBerlin";
+    var dates = ["2026-06-26","2026-06-27","2026-06-28"];
+    var url = "https://api.brightsky.dev/weather?lat=50.63&lon=7.35&date=2026-06-26&last_date=2026-06-29";
     fetch(url).then(function(r){return r.json()}).then(function(d){
       var el = document.getElementById("weather");
-      if(!el||!d.daily) return;
+      if(!el||!d.weather) return;
+      var daily = {};
+      dates.forEach(function(dt){ daily[dt] = {hi:-99,lo:99,icon:null}; });
+      d.weather.forEach(function(w){
+        var dt = w.timestamp.slice(0,10);
+        if(!daily[dt]) return;
+        var t = w.temperature;
+        if(t!=null){ if(t>daily[dt].hi) daily[dt].hi=t; if(t<daily[dt].lo) daily[dt].lo=t; }
+        if(!daily[dt].icon && w.icon) daily[dt].icon=w.icon;
+        if(w.icon && w.timestamp.slice(11,13)==="12") daily[dt].icon=w.icon;
+      });
       var html = "";
-      d.daily.time.forEach(function(date,i){
-        var code = d.daily.weather_code[i];
-        var icon = WMO[code] || "☁️";
-        var hi = Math.round(d.daily.temperature_2m_max[i]);
-        var lo = Math.round(d.daily.temperature_2m_min[i]);
+      dates.forEach(function(dt){
+        var day = daily[dt];
+        if(day.hi===-99) return;
+        var icon = ICON[day.icon] || "☁️";
         html += '<div class="weather-day">' +
-          '<div class="weather-day__label">' + (DAYS[date]||date) + '</div>' +
+          '<div class="weather-day__label">' + (DAYS[dt]||dt) + '</div>' +
           '<div class="weather-day__icon">' + icon + '</div>' +
-          '<div class="weather-day__temp">' + lo + '° / ' + hi + '°</div></div>';
+          '<div class="weather-day__temp">' + Math.round(day.lo) + '° / ' + Math.round(day.hi) + '°</div></div>';
       });
       el.innerHTML = html;
     }).catch(function(){});
   })();
   </script>
-  <script src="data.js?v=0dcb6a7"></script>
+  <script src="data.js?v=fe1e97e"></script>
   <script>!function(){var s=document.createElement('script');s.src='results.js?nc='+Date.now();s.onload=function(){var s2=document.createElement('script');s2.src='scores.js?nc='+Date.now();s2.onload=function(){var a=document.createElement('script');a.src='app.js?v=0766bf3';document.head.appendChild(a);};document.head.appendChild(s2);};document.head.appendChild(s);}()</script>
 
 </body>
